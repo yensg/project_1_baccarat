@@ -21,7 +21,7 @@ Action based:
 6. Continue to play or exit.
 
 7. Score to be recorded
---------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
 **Rules of the games**
 
@@ -53,3 +53,4 @@ Action based:
                     - same suites && consecutive (lowest must start from 1) > same digit && same suites > same suites > consecutive
                         - same suites && consective Q K A > 1 2 3
                         - same digit && same suites A A A > 10 10 10
+-------------------------------------------------------------------------------------------
