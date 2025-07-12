@@ -17,6 +17,10 @@ body {
   gap: 20px;
 }
 
+#message {
+  font-size: 30px;
+}
+
 #playersTable {
   display: flex;
   align-items: center;
