@@ -1,0 +1,74 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+}
+
+#dealer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#dealerTable {
+  display: flex;
+  margin: 20px;
+  gap: 20px;
+}
+
+#playersTable {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#playerTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player {
+  font-size: 20px;
+}
+
+#cardTable {
+  display: flex;
+  margin: 20px;
+  gap: 20px;
+}
+
+.cards {
+  border: 2px solid black;
+}
+
+#inGameButtons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+#outGameButtons {
+  display: flex;
+  gap: 10px;
+}
+
+#leftDisplay {
+  display: flex;
+  flex-direction: column;
+  border: 10px solid black;
+}
+
+#coinsSelections {
+  display: flex;
+  gap: 10px;
+}
+
+#play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 10px solid black;
+}

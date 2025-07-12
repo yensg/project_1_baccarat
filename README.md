@@ -1,6 +1,8 @@
+# Project 1: Baccarat
+
 ![Website Layout](Pictures/project_1_barrarat_layout.png)
 
-**User Experience**
+## User Experience
 
 How to play?
 
@@ -30,7 +32,7 @@ Action based:
 
 ---
 
-**Rules of the games**
+## Rules of the games
 
 - When first 2 cards are dealt.
 
