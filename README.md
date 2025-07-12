@@ -1,3 +1,5 @@
+![Website Layout](Pictures/project_1_barrarat_layout.png)
+
 **User Experience**
 
 How to play?
