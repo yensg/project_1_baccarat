@@ -1,14 +1,16 @@
 // Variables
-let dealerCards = "";
+let dealerCards = [];
 let dealerCardsValue = "";
+let dealerCardsTotal = "";
 let dealerCardsSuites = "";
 
-let messages = "";
+const messages = document.querySelector("#message");
 let randomIndex = 0;
 let cardsValue;
 
 let player1Cards = [];
 let player1CardsValue = "";
+let player1CardsTotal = "";
 let player1CardsSuites = "";
 let player1ActionSelection = "";
 
@@ -19,10 +21,13 @@ let player1TotalToken = 1000;
 document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
 let player1AddMinusToken = "+";
 
-let player2Cards = "";
+let player2Cards = [];
 let player2CardsValue = "";
+let player2CardsTotal = "";
 let player2CardsSuites = "";
 let player2ActionSelection = "";
+
+let player2PlayingStatus = "noPlay";
 let player2SelectedTokenAmt = 0;
 let player2CurrTokenAmt = 0;
 let player2TotalToken = 1000;
@@ -193,17 +198,105 @@ const addMinus = () => {
 // dealing first card out.
 const randomlyDealCard = () => {
   randomIndex = Math.floor(Math.random() * totalCards.length);
-  console.log(randomIndex);
+  //   console.log(randomIndex);
 };
 randomlyDealCard();
-console.log(totalCards.length);
+// console.log(totalCards.length);
+
+// start the game
+const startGame = () => {
+  if (player1PlayingStatus === "" || player2PlayingStatus === "") {
+    return;
+  }
+  // generate first card
+  if (player1PlayingStatus === "play") {
+    randomlyDealCard();
+    player1Cards.push(totalCards[randomIndex]);
+    player1CardsValue = cardsValueFn(player1Cards);
+    player1CardsSuites = cardsSuitesFn(player1Cards);
+    document.querySelector("#player1Card1").innerText = player1Cards[0];
+    // generate Second card
+    randomlyDealCard();
+    player1Cards.push(totalCards[randomIndex]);
+    player1CardsValue = cardsValueFn(player1Cards);
+    player1CardsSuites = cardsSuitesFn(player1Cards);
+    player1CardsTotal = cardsTotalFn(player1CardsValue);
+    console.log(player1Cards);
+    console.log(player1CardsValue);
+    // console.log(player1CardsSuites);
+    console.log(player1CardsTotal);
+    document.querySelector("#player1Card2").innerText = player1Cards[1];
+  }
+  // generate first card
+  if (player2PlayingStatus === "play") {
+    randomlyDealCard();
+    player2Cards.push(totalCards[randomIndex]);
+    player2CardsValue = cardsValueFn(player2Cards);
+    player2CardsSuites = cardsSuitesFn(player2Cards);
+    document.querySelector("#player2Card1").innerText = player1Cards[0];
+    // generate Second card
+    randomlyDealCard();
+    player2Cards.push(totalCards[randomIndex]);
+    player2CardsValue = cardsValueFn(player2Cards);
+    player2CardsSuites = cardsSuitesFn(player2Cards);
+    player2CardsTotal = cardsTotalFn(player2CardsValue);
+    console.log(player2Cards);
+    console.log(player2CardsValue);
+    // console.log(player2CardsSuites);
+    console.log(player2CardsTotal);
+    document.querySelector("#player2Card2").innerText = player1Cards[1];
+  }
+  // generate first card
+  if (player1PlayingStatus !== "" && player2PlayingStatus !== "") {
+    randomlyDealCard();
+    dealerCards.push(totalCards[randomIndex]);
+    dealerCardsValue = cardsValueFn(dealerCards);
+    dealerCardsSuites = cardsSuitesFn(dealerCards);
+    document.querySelector("#dealerCard1").innerText = dealerCards[0];
+    // generate Second card
+    randomlyDealCard();
+    dealerCards.push(totalCards[randomIndex]);
+    dealerCardsValue = cardsValueFn(dealerCards);
+    dealerCardsSuites = cardsSuitesFn(dealerCards);
+    dealerCardsTotal = cardsTotalFn(dealerCardsValue);
+    console.log(dealerCards);
+    console.log(dealerCardsValue);
+    // console.log(dealerCardsSuites);
+    console.log(dealerCardsTotal);
+    document.querySelector("#dealerCard2").innerText = dealerCards[1];
+  }
+  player2CardsTotal = 9;
+  tallyResults2Cards();
+};
+
+const noPlaySelection = (event) => {
+  // have to put ""? how about the inner.Text?
+  if (event.target.id === "player1NoPlayButton") {
+    player1PlayingStatus = "noPlay";
+  }
+  if (event.target.id === "player2NoPlayButton") {
+    player2PlayingStatus = "noPlay";
+  }
+  console.log(event.target.id);
+  console.log(player1PlayingStatus);
+  console.log(player2PlayingStatus);
+};
 
 // player 1 plays
-
 const player1Play = () => {
+  if (player1TotalToken === 0) {
+    player1PlayingStatus = "noPlay";
+  }
+  //   if (player1PlayingStatus === "noPlay" || player1Cards.length === 2) {
+  //     return;
+  //   }
+  if (player1Cards.length === 2) {
+    return;
+  }
   player1PlayingStatus = "play";
-  randomlyDealCard();
-  player1Cards.push(totalCards[randomIndex]);
+  player1TotalToken -= player1CurrTokenAmt;
+  document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
+  startGame();
 };
 
 // Function to get array of the cards' values
@@ -213,6 +306,15 @@ const cardsValueFn = (array) => {
   });
 };
 
+const cardsTotalFn = (array) => {
+  return array.reduce((total, value) => {
+    if (value === 11 || value === 12 || value === 13) {
+      value = 10;
+    }
+    return (total += value);
+  }, 0);
+};
+
 // Function to get array of the cards' suites
 const cardsSuitesFn = (array) => {
   return array.map(([num, suites]) => {
@@ -220,30 +322,108 @@ const cardsSuitesFn = (array) => {
   });
 };
 
-player1Play();
-player1Play();
-player1CardsValue = cardsValueFn(player1Cards);
-player1CardsSuites = cardsSuitesFn(player1Cards);
+const tallyResults2Cards = () => {
+  messages.innerText = "";
+  if (
+    (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) &&
+    (player1CardsTotal % 10 === 9 || player1CardsTotal % 10 === 8)
+  ) {
+    messages.innerText = "Player 1 tie!";
+  } else if (
+    (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) &&
+    (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8)
+  ) {
+    messages.innerText += "Player 2 tie!";
+  } else if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
+    messages.innerText = "Dealer won!";
+    return; // how to do it in a way that any of these 3 happens then stop?
+  }
+  if (player1CardsTotal % 10 === 9 || player1CardsTotal % 10 === 8) {
+    messages.innerText = "Player 1 won!";
+  }
+  if (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8) {
+    messages.innerText += "Player 2 won!";
+  }
+};
 
-console.log(player1Cards);
-console.log(player1CardsValue);
-console.log(player1CardsSuites);
+const reset = (event) => {
+  dealerCards = [];
+  dealerCardsValue = "";
+  dealerCardsTotal = "";
+  dealerCardsSuites = "";
+  document.querySelector("#dealerCard1").innerText = "blank";
+  document.querySelector("#dealerCard2").innerText = "blank";
+  document.querySelector("#dealerCard3").innerText = "blank";
 
-// const addMinus = (event) => {
-//   player1AddMinusToken = event.target.innerText;
-//   console.log(player1AddMinusToken);
-// };
+  messages.innerText = "Place your tokens!";
+  randomIndex = 0;
+  cardsValue;
+
+  player1Cards = [];
+  player1CardsValue = "";
+  player1CardsTotal = "";
+  player1CardsSuites = "";
+  player1ActionSelection = "";
+
+  player1PlayingStatus = "";
+  player1SelectedTokenType = 0;
+  player1CurrTokenAmt = 0;
+  player1TotalToken = 1000;
+  document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
+  document.querySelector("#player1PlayButton").innerText = "&nbsp;";
+  document.querySelector("#player1Card1").innerText = "blank";
+  document.querySelector("#player1Card2").innerText = "blank";
+  document.querySelector("#player1Card3").innerText = "blank";
+  player1AddMinusToken = "+";
+
+  player2Cards = [];
+  player2CardsValue = "";
+  player2CardsTotal = "";
+  player2CardsSuites = "";
+  player2ActionSelection = "";
+
+  player2PlayingStatus = "noPlay";
+  player2SelectedTokenAmt = 0;
+  player2CurrTokenAmt = 0;
+  player2TotalToken = 1000;
+  document.querySelector("#player2TokenDisplay").innerText = player2TotalToken;
+  document.querySelector("#player2PlayButton").innerText = "&nbsp;";
+  document.querySelector("#player2Card1").innerText = "blank";
+  document.querySelector("#player2Card2").innerText = "blank";
+  document.querySelector("#player2Card3").innerText = "blank";
+  player2AddMinusToken = "+";
+};
+
+// player1Play();
+// player1Play();
+// player1CardsValue = cardsValueFn(player1Cards);
+// player1CardsSuites = cardsSuitesFn(player1Cards);
+
+// console.log(player1Cards);
+// console.log(player1CardsValue);
+// console.log(player1CardsSuites);
 
 // Event Listeners
 document.querySelector("#player1AddMinus").addEventListener("click", addMinus);
 document
   .querySelector("#player1CoinsSelections")
   .addEventListener("click", player1TokenSelection);
-// document.querySelector("#player1PlayButton").addEventListener("click",);
+document
+  .querySelector("#player1PlayButton")
+  .addEventListener("click", player1Play);
+document
+  .querySelector("#player1NoPlayButton")
+  .addEventListener("click", noPlaySelection);
+document
+  .querySelector("#player2NoPlayButton")
+  .addEventListener("click", noPlaySelection);
 
-// document.querySelector(".player1").addEventListener("click", function (event) {
-//   console.log(event.target, event.currentTarget);
-// });
+document.querySelector("#reset").addEventListener("click", reset);
+// document
+//   .querySelector("playersTable")
+//   .addEventListener("click", function (event) {
+//     console.log(event.target, event.currentTarget);
+//   });
 
 // document.querySelector(".player2").addEventListener("click", function (event) {
 //   console.log(event.target, event.currentTarget);
