@@ -30,7 +30,7 @@ body {
   gap: 20px;
 }
 
-#playerTable {
+.playerTable {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,4 +90,13 @@ body {
   flex-direction: column;
   align-items: center;
   border: 5px solid black;
+}
+
+#player1PlayButton {
+}
+#player2PlayButton {
+}
+#player1NoPlayButton {
+}
+#player2NoPlayButton {
 }

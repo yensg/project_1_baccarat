@@ -112,3 +112,50 @@ Action based:
      - update message
 
 ---
+
+Event flow
+
+- player2TokenSelection()
+
+  - adds token to play button
+  - cannot exceed the player2TotalToken's range
+
+- click on #player1PlayButton or #player2PlayButton
+
+  - player2Play()
+    - if player2PlayingStatus "" means its the start
+    - if already issued 2 cards then it's in the midst of the game
+    - if no more tokens then change status to noPlay
+    - then check on another play if already selected play or noPlay
+    - if both playingStatus have been updated, proceed with gameStart()
+
+- click on #player1NoPlayButton or #player2NoPlayButton
+
+  - if player1 noPlay, then **turn** will fixed to the other player
+  - to change player2playingStatus to noPlay so that player2Play() can proceed to gameStart()
+
+- gameStart() trigger by #player1PlayButton or #player2PlayButton
+
+  - if playingStatus === play
+    - randomlyDealCard()
+    - update cards array
+    - update card value array & suites array
+    - update card picture
+  - if both players' playingStatus is filled
+    - dealer will issue dealer's cards.
+  - immediately tallyResults2Cards()
+
+- tallyResults2Cards()
+
+  - if player1 has 9/8 and dealer has 9/8, tie
+    - otherwise, player1 with 9/8 wins and tally score
+    - update player1TotalToken based on odds and player1CurrTokenAmt
+    - update **player1ResultStatus**
+  - But if dealer has 9/8, then player 1 loses
+    - if odd = 1 then no action needed
+    - if odd >1 then deduct more from the TotalTokens
+    - update **dealerP1ResultStatus** = "won"
+  - if dealer wins both sides then endGame()
+  - Update turns here.
+
+- click on player1HitButton to trigger midGame()
