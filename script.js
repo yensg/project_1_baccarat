@@ -417,6 +417,7 @@ const tallyResults2Cards = () => {
   //if player1 = 9/8
   if (player1CardsTotal % 10 === 9 || player1CardsTotal % 10 === 8) {
     //if player1 same as dealer, tie
+    dealerP1ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
       messages.innerHTML += "Player 1 tie!" + "\n";
       player1ResultStatus = "tie";
@@ -425,7 +426,7 @@ const tallyResults2Cards = () => {
       //otherwise player1 won
       messages.innerHTML += "Player 1 won!" + "\n";
       player1ResultStatus = "won";
-      if (tallyOdds(player1CardsValue, player1CardsSuites) === 1) {
+      if (tallyOdds(player1CardsValue, player1CardsSuites) === 2) {
         player1TotalToken += 2 * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
@@ -449,7 +450,7 @@ const tallyResults2Cards = () => {
     if (player1PlayingStatus === "play") {
       player1ResultStatus = "lost";
       messages.innerHTML += "Player 1 lost!" + "\n";
-      if (tallyOdds(dealerCardsValue, dealerCardsSuites) !== 1) {
+      if (tallyOdds(dealerCardsValue, dealerCardsSuites) !== 2) {
         player1TotalToken -
           player1CurrTokenAmt *
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
@@ -460,6 +461,11 @@ const tallyResults2Cards = () => {
           "-" +
           player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
           "!";
+        console.log(player1CurrTokenAmt);
+        console.log(tallyOdds(dealerCardsValue, dealerCardsSuites));
+        console.log(
+          player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites)
+        );
       } else {
         messages.innerHTML += "-" + player1CurrTokenAmt;
       }
@@ -472,6 +478,7 @@ const tallyResults2Cards = () => {
   }
 
   if (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8) {
+    dealerP2ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
       messages.innerHTML += "Player 2 tie!" + "\n";
       player2ResultStatus = "tie";
@@ -479,7 +486,7 @@ const tallyResults2Cards = () => {
     } else {
       messages.innerHTML += "Player 2 won!" + "\n";
       player2ResultStatus = "won";
-      if (tallyOdds(dealerCardsValue, dealerCardsSuites) === 1) {
+      if (tallyOdds(dealerCardsValue, dealerCardsSuites) === 2) {
         player2TotalToken += 2 * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
@@ -501,7 +508,7 @@ const tallyResults2Cards = () => {
     if (player2PlayingStatus === "play") {
       player2ResultStatus = "lost";
       messages.innerHTML += "Player 2 lost!" + "\n";
-      if (tallyOdds(dealerCardsValue, dealerCardsSuites !== 1)) {
+      if (tallyOdds(dealerCardsValue, dealerCardsSuites) !== 2) {
         player2TotalToken -
           player2CurrTokenAmt *
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
@@ -512,6 +519,11 @@ const tallyResults2Cards = () => {
           "-" +
           player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
           "!";
+        console.log(player2CurrTokenAmt);
+        console.log(tallyOdds(dealerCardsValue, dealerCardsSuites));
+        console.log(
+          player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites)
+        );
       } else {
         messages.innerHTML += "-" + player2CurrTokenAmt;
       }
@@ -521,15 +533,20 @@ const tallyResults2Cards = () => {
     turn = "player2";
     messages.innerHTML += "Player 2, Choose your selection!" + "\n";
   }
-
+  // when to end the game
   if (
     (dealerP1ResultStatus === "won" && dealerP2ResultStatus === "won") ||
     (player1ResultStatus === "won" && player2ResultStatus === "tie") ||
     (player2ResultStatus === "won" && player1ResultStatus === "tie") ||
     (player1ResultStatus === "won" && player2PlayingStatus === "noPlay") ||
     (player2ResultStatus === "won" && player1PlayingStatus === "noPlay") ||
-    (player2ResultStatus === "won" && player1ResultStatus === "won")
+    (player2ResultStatus === "won" && player1ResultStatus === "won") ||
+    (player2ResultStatus === "tie" && player1PlayingStatus === "noPlay") ||
+    (player1ResultStatus === "tie" && player2PlayingStatus === "noPlay") ||
+    (player1ResultStatus === "tie" && player2ResultStatus === "lost") ||
+    (player2ResultStatus === "tie" && player1ResultStatus === "lost")
   ) {
+    endGame();
   }
 };
 
@@ -541,19 +558,18 @@ const tallyOdds = (array1, array2) => {
   } else if (array2[0] === array2[1]) {
     return sameSuites;
   } else {
-    return 1;
+    return 2;
   }
 };
 
 const midGame = (event) => {
-  //   console.log(turn);
-  //   console.log(player1PlayingStatus); // 3 play or noPlay or ""
-  //   console.log(player1ResultStatus); // 4 win or tie or lost or ""
-  //   console.log(dealerP1ResultStatus); //2 win or ""
-  //   console.log(player2PlayingStatus);
-  //   console.log(player2ResultStatus);
-  //   console.log(dealerP2ResultStatus);
+  // console.log(player1PlayingStatus); // 3 play or noPlay or ""
+  // console.log(player1ResultStatus); // 4 win or tie or lost or ""
+  // console.log(dealerP1ResultStatus); //2 win or ""
+  // console.log(dealerP2ResultStatus);
 
+  // console.log(player1HitOrStay); //2 hit or stay
+  // console.log(player2HitOrStay);
   //   console.warn(typeof player2PlayingStatus, player2ResultStatus);
 
   if (player1PlayingStatus === "play" && player1ResultStatus === "") {
@@ -641,95 +657,132 @@ const midGame = (event) => {
     (player2HitOrStay === "stay" || player2HitOrStay === "hit")
   ) {
     messages.innerText = "";
-    dealerDeal3Cards();
+    if (dealerCards.length < 3) {
+      dealerDeal3Cards();
+    }
     document.querySelector("#dealerCard3").innerText =
       displayCards(dealerCards[2]) + " | " + dealerCards[2];
   }
+  // console.log(player1HitOrStay);
+  // console.log(player2HitOrStay);
+  // console.log(player1ResultStatus);
+  // console.log(player2ResultStatus);
+  // console.warn(player1HitOrStay === "hit" && player2HitOrStay === "hit");
+  // console.warn(player1HitOrStay === "hit" && player2HitOrStay === "stay");
+  // console.warn(player1HitOrStay === "stay" && player2HitOrStay === "hit");
+  // console.warn(player1HitOrStay === "stay" && player2HitOrStay === "stay");
+  // console.warn(player1HitOrStay === "hit");
+  // console.warn(player2ResultStatus === "win" || player2ResultStatus === "tie");
+  // console.warn(player2HitOrStay === "hit");
+  // console.warn(player1ResultStatus === "win" || player1ResultStatus === "tie");
+  // console.warn(player1HitOrStay === "stay");
+  // console.warn(player2ResultStatus === "win" || player2ResultStatus === "tie");
+  // console.warn(player2HitOrStay === "stay");
+  // console.warn(player1ResultStatus === "win" || player1ResultStatus === "tie");
+
   if (
-    (player1PlayingStatus === "play" &&
-      player1ResultStatus === "" &&
-      player1Cards.length === 3 &&
-      player2PlayingStatus === "play" &&
-      player2ResultStatus === "" &&
-      player2Cards.length === 3) ||
-    (player1PlayingStatus === "play" &&
-      player1ResultStatus === "" &&
-      player1Cards.length === 3 &&
-      (player2ResultStatus === "" || player2ResultStatus === "tie")) ||
-    (player2PlayingStatus === "play" &&
-      player2ResultStatus === "" &&
-      player2Cards.length === 3 &&
-      (player1ResultStatus === "" || player1ResultStatus === "tie"))
+    (player1HitOrStay === "hit" && player2HitOrStay === "hit") ||
+    (player1HitOrStay === "hit" && player2HitOrStay === "stay") ||
+    (player1HitOrStay === "stay" && player2HitOrStay === "hit") ||
+    (player1HitOrStay === "stay" && player2HitOrStay === "stay") ||
+    (player1HitOrStay === "hit" &&
+      (player2ResultStatus === "won" ||
+        player2ResultStatus === "tie" ||
+        player2PlayingStatus === "noPlay")) ||
+    (player2HitOrStay === "hit" &&
+      (player1ResultStatus === "won" ||
+        player1ResultStatus === "tie" ||
+        player1PlayingStatus === "noPlay")) ||
+    (player1HitOrStay === "stay" &&
+      (player2ResultStatus === "won" ||
+        player2ResultStatus === "tie" ||
+        player2PlayingStatus === "noPlay")) ||
+    (player2HitOrStay === "stay" &&
+      (player1ResultStatus === "won" ||
+        player1ResultStatus === "tie" ||
+        player1PlayingStatus === "noPlay"))
   ) {
-    // tallyResults3Cards();
+    tallyResults3Cards();
+    // console.log(1);
   }
 };
 
 const tallyResults3Cards = () => {
   //   messages.innerText = "";
+  // console.log(player1PlayingStatus); // 3 play or noPlay or ""
+  // console.log(player1ResultStatus); // 4 win or tie or lost or ""
+  // console.log(dealerP1ResultStatus); //2 win or ""
+  // console.log(dealerP2ResultStatus);
+
+  // console.log(player1HitOrStay); //2 hit or stay
+  // console.log(player2HitOrStay);
+  console.warn(player1Cards);
   console.log(player1CardsTotal);
-  console.log(player1CardsTotal % 10);
+  console.warn(player1CardsTotal % 10);
   console.log(player1CardsValue);
   console.log(player1CardsSuites);
+
+  console.warn(player2Cards);
+  console.log(player2CardsTotal);
+  console.warn(player2CardsTotal % 10);
+  console.log(player2CardsValue);
+  console.log(player2CardsSuites);
+
+  console.warn(dealerCards);
   console.log(dealerCardsTotal);
-  console.log(dealerCardsTotal % 10);
+  console.warn(dealerCardsTotal % 10);
   console.log(dealerCardsValue);
   console.log(dealerCardsSuites);
 
-  if (player1ResultStatus === "") {
+  if (player1ResultStatus === "" && player1PlayingStatus === "play") {
+    dealerP1ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === player1CardsTotal % 10) {
-      console.log(1);
       messages.innerHTML += "Player 1 tie!" + "\n";
       player1ResultStatus = "tie";
       player1TotalToken += player1CurrTokenAmt;
     } else if (player1CardsTotal % 10 > dealerCardsTotal % 10) {
-      console.log(2);
       messages.innerHTML += "Player 1 won!" + "\n";
       player1ResultStatus = "won";
-      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 1) {
-        console.log(3);
+      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 2) {
         player1TotalToken += 2 * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        messages.innerHTML += player1CurrTokenAmt + "!";
+        messages.innerHTML += "+" + player1CurrTokenAmt + "!";
       } else {
-        console.log(4);
         player1TotalToken +=
           tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
           player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
         messages.innerHTML +=
+          "+" +
           tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
             player1CurrTokenAmt +
           "!";
       }
     } else if (dealerCardsTotal % 10 > player1CardsTotal % 10) {
-      console.log(5);
-      if (player1PlayingStatus === "play") {
-        console.log(6);
-        messages.innerHTML += "Player 1 lost!" + "\n";
-        if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 1) {
-          console.log(7);
-          player1TotalToken -
-            player1CurrTokenAmt *
-              (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
-          document.querySelector("#player1TokenDisplay").innerText =
-            player1TotalToken;
-          messages.innerHTML +=
-            player1CurrTokenAmt *
-              (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1) +
-            "!";
-        } else {
-          console.log(8);
-          messages.innerHTML = player1CurrTokenAmt;
-        }
-        dealerP1ResultStatus = "won";
+      // if (player1PlayingStatus === "play") {
+      messages.innerHTML += "Player 1 lost!" + "\n";
+      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
+        player1TotalToken -
+          player1CurrTokenAmt *
+            (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
+        document.querySelector("#player1TokenDisplay").innerText =
+          player1TotalToken;
+        messages.innerHTML +=
+          "-" +
+          player1CurrTokenAmt *
+            tallyOddsFinal(dealerCardsValue, dealerCardsSuites) +
+          "!";
+      } else {
+        messages.innerHTML += "+" + player1CurrTokenAmt + "!";
       }
+      dealerP1ResultStatus = "won";
     }
   }
 
-  if (player2ResultStatus === "") {
+  if (player2ResultStatus === "" && player2PlayingStatus === "play") {
+    dealerP2ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === player2CardsTotal % 10) {
       messages.innerHTML += "Player 2 tie!" + "\n";
       player2ResultStatus = "tie";
@@ -737,11 +790,11 @@ const tallyResults3Cards = () => {
     } else if (player2CardsTotal % 10 > dealerCardsTotal % 10) {
       messages.innerHTML += "Player 2 won!" + "\n";
       player2ResultStatus = "won";
-      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 1) {
+      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 2) {
         player2TotalToken += 2 * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        messages.innerHTML += player2CurrTokenAmt + "!";
+        messages.innerHTML += "+" + player2CurrTokenAmt + "!";
       } else {
         player2TotalToken +=
           tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
@@ -749,31 +802,35 @@ const tallyResults3Cards = () => {
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
         messages.innerHTML +=
+          "+" +
           tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
             player2CurrTokenAmt +
           "!";
       }
-    } else if (dealerCardsTotal % 10 > player2CardsTotal % 10 === 8) {
-      if (player2PlayingStatus === "play") {
-        messages.innerHTML += "Player 2 lost!" + "\n";
-        if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 1) {
-          player2TotalToken -
-            player2CurrTokenAmt *
-              (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
-          document.querySelector("#player2TokenDisplay").innerText =
-            player2TotalToken;
-          messages.innerHTML +=
-            player2CurrTokenAmt *
-              (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1) +
-            "!";
-        } else {
-          messages.innerHTML = player2CurrTokenAmt;
-        }
-        dealerP2ResultStatus = "won";
+    } else if (dealerCardsTotal % 10 > player2CardsTotal % 10) {
+      // if (player2PlayingStatus === "play") {
+      messages.innerHTML += "Player 2 lost!" + "\n";
+      if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
+        player2TotalToken -
+          player2CurrTokenAmt *
+            (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
+        document.querySelector("#player2TokenDisplay").innerText =
+          player2TotalToken;
+        messages.innerHTML +=
+          "-" +
+          player2CurrTokenAmt *
+            (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1) +
+          "!";
+      } else {
+        messages.innerHTML = "-" + player2CurrTokenAmt + "!";
       }
+      dealerP2ResultStatus = "won";
     }
   }
-  //   endGame();
+
+  console.log(dealerP1ResultStatus);
+  console.log(dealerP2ResultStatus);
+  // endGame();
 };
 
 // values, suites
@@ -805,7 +862,7 @@ const tallyOddsFinal = (array1, array2) => {
   } else if (array2[0] === array2[1] && array2[1] === array2[2]) {
     return sameTriple;
   } else {
-    return 1;
+    return 2;
   }
 };
 
@@ -839,6 +896,7 @@ const endGame = () => {
   player1CardsSuites = "";
   player1ActionSelection = "";
   player1ResultStatus = "";
+  player1HitOrStay = "";
 
   player1PlayingStatus = "";
   player1SelectedTokenType = 0;
@@ -860,6 +918,7 @@ const endGame = () => {
   player2CardsSuites = "";
   player2ActionSelection = "";
   player2ResultStatus = "";
+  player2HitOrStay = "";
 
   player2PlayingStatus = "";
   player2SelectedTokenAmt = 0;
