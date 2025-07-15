@@ -573,6 +573,7 @@ const midGame = (event) => {
   //   console.warn(typeof player2PlayingStatus, player2ResultStatus);
 
   if (player1PlayingStatus === "play" && player1ResultStatus === "") {
+    messages.innerText = "";
     if (event.target.id === "player1HitButton") {
       player1HitOrStay = "hit";
       player1Deal3Cards();
@@ -596,10 +597,14 @@ const midGame = (event) => {
         player1Deal3Cards();
         document.querySelector("#player1Card3").innerText =
           displayCards(player1Cards[2]) + " | " + player1Cards[2];
+      }
+      if (
+        player2PlayingStatus === "play" &&
+        player2ResultStatus === "" &&
+        player2Cards.length === 2
+      ) {
+        messages.innerText = "Player 2, Choose your selection!";
       } else if (
-        (player2PlayingStatus === "play" &&
-          player2ResultStatus === "" &&
-          player2Cards.length === 2) ||
         player2ResultStatus === "won" ||
         player2PlayingStatus === "noPlay"
       ) {
@@ -613,6 +618,7 @@ const midGame = (event) => {
   }
   // cannot do else if here because we are checking a "fixed variables" so have to spilt it
   if (player2PlayingStatus === "play" && player2ResultStatus === "") {
+    messages.innerText = "";
     if (event.target.id === "player2HitButton") {
       player2HitOrStay = "hit";
       player2Deal3Cards();
@@ -637,10 +643,17 @@ const midGame = (event) => {
         player2Deal3Cards();
         document.querySelector("#player2Card3").innerText =
           displayCards(player2Cards[2]) + " | " + player2Cards[2];
+      }
+      if (
+        player1PlayingStatus === "play" &&
+        player1ResultStatus === "" &&
+        player1Cards.length === 2
+      ) {
+        messages.innerText = "Player 1, Choose your selection!";
       } else if (
-        (player1PlayingStatus === "play" &&
-          player1ResultStatus === "" &&
-          player1Cards.length === 2) ||
+        // (player1PlayingStatus === "play" &&
+        //   player1ResultStatus === "" &&
+        //   player1Cards.length === 2) ||
         player1ResultStatus === "won" ||
         player1PlayingStatus === "noPlay"
       ) {
@@ -761,7 +774,6 @@ const tallyResults3Cards = () => {
           "!";
       }
     } else if (dealerCardsTotal % 10 > player1CardsTotal % 10) {
-      // if (player1PlayingStatus === "play") {
       messages.innerHTML += "Player 1 lost!" + "\n";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
         player1TotalToken -
@@ -822,15 +834,14 @@ const tallyResults3Cards = () => {
             (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1) +
           "!";
       } else {
-        messages.innerHTML = "-" + player2CurrTokenAmt + "!";
+        messages.innerHTML += "-" + player2CurrTokenAmt + "!";
       }
       dealerP2ResultStatus = "won";
     }
   }
-
-  console.log(dealerP1ResultStatus);
-  console.log(dealerP2ResultStatus);
-  // endGame();
+  if (dealerP1ResultStatus !== "" && dealerP2ResultStatus !== "") {
+    endGame();
+  }
 };
 
 // values, suites
@@ -884,8 +895,6 @@ const endGame = () => {
   document.querySelector("#dealerCard3").innerText = "blank";
   document.querySelector("#dealerCard3").style.display = "";
 
-  // messages.innerText = "Place your tokens!";
-  //   messages.innerText = "Place your tokens!";
   turn = "";
   randomIndex = 0;
   cardsValue;
