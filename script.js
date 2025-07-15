@@ -268,6 +268,15 @@ const randomlyDealCard = () => {
 
 // start the game
 const startGame = () => {
+  document.querySelector("#dealerCard1").innerText = "blank";
+  document.querySelector("#dealerCard2").innerText = "blank";
+  document.querySelector("#dealerCard3").innerText = "blank";
+  document.querySelector("#player1Card1").innerText = "blank";
+  document.querySelector("#player1Card2").innerText = "blank";
+  document.querySelector("#player1Card3").innerText = "blank";
+  document.querySelector("#player2Card1").innerText = "blank";
+  document.querySelector("#player2Card2").innerText = "blank";
+  document.querySelector("#player2Card3").innerText = "blank";
   // generate first card
   if (player1PlayingStatus === "play") {
     player1Deal3Cards();
@@ -890,9 +899,9 @@ const endGame = () => {
   dealerCardsSuites = "";
   dealerP2ResultStatus = "";
   dealerP1ResultStatus = "";
-  document.querySelector("#dealerCard1").innerText = "blank";
-  document.querySelector("#dealerCard2").innerText = "blank";
-  document.querySelector("#dealerCard3").innerText = "blank";
+  // document.querySelector("#dealerCard1").innerText = "blank";
+  // document.querySelector("#dealerCard2").innerText = "blank";
+  // document.querySelector("#dealerCard3").innerText = "blank";
   document.querySelector("#dealerCard3").style.display = "";
 
   turn = "";
@@ -913,9 +922,9 @@ const endGame = () => {
   //   player1TotalToken = 1000;
   document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
   document.querySelector("#player1PlayButton").innerText = "";
-  document.querySelector("#player1Card1").innerText = "blank";
-  document.querySelector("#player1Card2").innerText = "blank";
-  document.querySelector("#player1Card3").innerText = "blank";
+  // document.querySelector("#player1Card1").innerText = "blank";
+  // document.querySelector("#player1Card2").innerText = "blank";
+  // document.querySelector("#player1Card3").innerText = "blank";
   document.querySelector("#player1PlayButton").style.display = "";
   document.querySelector("#player1NoPlayButton").style.display = "";
   document.querySelector("#player1Card3").style.display = "";
@@ -935,9 +944,9 @@ const endGame = () => {
   //   player2TotalToken = 1000;
   document.querySelector("#player2TokenDisplay").innerText = player2TotalToken;
   document.querySelector("#player2PlayButton").innerText = "";
-  document.querySelector("#player2Card1").innerText = "blank";
-  document.querySelector("#player2Card2").innerText = "blank";
-  document.querySelector("#player2Card3").innerText = "blank";
+  // document.querySelector("#player2Card1").innerText = "blank";
+  // document.querySelector("#player2Card2").innerText = "blank";
+  // document.querySelector("#player2Card3").innerText = "blank";
   document.querySelector("#player2PlayButton").style.display = "";
   document.querySelector("#player2NoPlayButton").style.display = "";
   document.querySelector("#player2Card3").style.display = "";
