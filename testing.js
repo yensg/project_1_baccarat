@@ -187,3 +187,51 @@ console.log(altMap(cardsOnHand));
 
 // c = 99 % 10;
 // console.log(c);
+
+if (
+  player2ResultStatus === "" &&
+  (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8)
+) {
+  if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
+    messages.innerHTML += "Player 2 tie!" + "\n";
+    player2ResultStatus = "tie";
+    player2TotalToken += player2CurrTokenAmt;
+  } else {
+    messages.innerHTML += "Player 2 won!" + "\n";
+    player2ResultStatus = "won";
+    if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 1) {
+      player2TotalToken += 2 * player2CurrTokenAmt;
+      document.querySelector("#player2TokenDisplay").innerText =
+        player2TotalToken;
+      messages.innerHTML += player2CurrTokenAmt + "!";
+    } else {
+      player2TotalToken +=
+        tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
+        player2CurrTokenAmt;
+      document.querySelector("#player2TokenDisplay").innerText =
+        player2TotalToken;
+      messages.innerHTML +=
+        tallyOddsFinal(dealerCardsValue, dealerCardsSuites) *
+          player2CurrTokenAmt +
+        "!";
+    }
+  }
+} else if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
+  if (player2PlayingStatus === "play") {
+    messages.innerHTML += "Player 2 lost!" + "\n";
+    if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 1) {
+      player2TotalToken -
+        player2CurrTokenAmt *
+          (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
+      document.querySelector("#player2TokenDisplay").innerText =
+        player2TotalToken;
+      messages.innerHTML =
+        player2CurrTokenAmt *
+          (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1) +
+        "!";
+    } else {
+      messages.innerHTML = player2CurrTokenAmt;
+    }
+    dealerP2ResultStatus = "won";
+  }
+}

@@ -159,3 +159,7 @@ Event flow
   - Update turns here.
 
 - click on player1HitButton to trigger midGame()
+  - if player1 didnt win with 2 cards then can decide to hit or stay
+  - if hit, he will get next card
+  - if stay, he might still get the next card if his score is below 5.
+  - either way, he will update the HitOrStay variable.
