@@ -414,15 +414,15 @@ const displayCards = (array) => {
 
 const tallyResults2Cards = () => {
   messages.innerText = "";
-
+  //if player1 = 9/8
   if (player1CardsTotal % 10 === 9 || player1CardsTotal % 10 === 8) {
-    //player1 = 9/8
+    //if player1 same as dealer, tie
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
-      //player1 same as dealer
       messages.innerHTML += "Player 1 tie!" + "\n";
       player1ResultStatus = "tie";
       player1TotalToken += player1CurrTokenAmt;
     } else {
+      //otherwise player1 won
       messages.innerHTML += "Player 1 won!" + "\n";
       player1ResultStatus = "won";
       if (tallyOdds(player1CardsValue, player1CardsSuites) === 1) {
@@ -443,7 +443,9 @@ const tallyResults2Cards = () => {
           "!";
       }
     }
+    // if player 1 not 9/8 amd dealer is 9/8
   } else if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
+    // if player1 selected to play,
     if (player1PlayingStatus === "play") {
       player1ResultStatus = "lost";
       messages.innerHTML += "Player 1 lost!" + "\n";
@@ -463,11 +465,11 @@ const tallyResults2Cards = () => {
       }
       dealerP1ResultStatus = "won";
     }
+    // if player1 not 9/8 and deler not 9/8, and if player1 playing then means need 3rd card. so pass the turn to player2.
   } else if (player1PlayingStatus === "play") {
     turn = "player1";
     messages.innerHTML += "Player 1, Choose your selection!" + "\n";
   }
-  console.log(turn);
 
   if (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8) {
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
@@ -496,9 +498,9 @@ const tallyResults2Cards = () => {
       }
     }
   } else if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
-    player2ResultStatus = "lost";
-    messages.innerHTML += "Player 2 lost!" + "\n";
     if (player2PlayingStatus === "play") {
+      player2ResultStatus = "lost";
+      messages.innerHTML += "Player 2 lost!" + "\n";
       if (tallyOdds(dealerCardsValue, dealerCardsSuites !== 1)) {
         player2TotalToken -
           player2CurrTokenAmt *
