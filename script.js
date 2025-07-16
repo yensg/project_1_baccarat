@@ -1,4 +1,4 @@
-// Dealer
+Dealer;
 let dealerCards = [];
 let dealerCardsValue = "";
 let dealerCardsTotal = "";
@@ -58,61 +58,118 @@ const consecutiveTriple = 5;
 
 // CardTypes kvp
 const cardTypes = {
-  spadeA: [1, 4],
-  spade2: [2, 4],
-  spade3: [3, 4],
-  spade4: [4, 4],
-  spade5: [5, 4],
-  spade6: [6, 4],
-  spade7: [7, 4],
-  spade8: [8, 4],
-  spade9: [9, 4],
-  spade10: [10, 4],
-  spadeJ: [11, 4],
-  spadeQ: [12, 4],
-  spadeK: [13, 4],
+  spadeA: { card: [1, 4], image: "Pictures/decks_of_cards/ace_of_spades.png" },
+  spade2: { card: [2, 4], image: "Pictures/decks_of_cards/2_of_spades.png" },
+  spade3: { card: [3, 4], image: "Pictures/decks_of_cards/3_of_spades.png" },
+  spade4: { card: [4, 4], image: "Pictures/decks_of_cards/4_of_spades.png" },
+  spade5: { card: [5, 4], image: "Pictures/decks_of_cards/5_of_spades.png" },
+  spade6: { card: [6, 4], image: "Pictures/decks_of_cards/6_of_spades.png" },
+  spade7: { card: [7, 4], image: "Pictures/decks_of_cards/7_of_spades.png" },
+  spade8: { card: [8, 4], image: "Pictures/decks_of_cards/8_of_spades.png" },
+  spade9: { card: [9, 4], image: "Pictures/decks_of_cards/9_of_spades.png" },
+  spade10: { card: [10, 4], image: "Pictures/decks_of_cards/10_of_spades.png" },
+  spadeJ: {
+    card: [11, 4],
+    image: "Pictures/decks_of_cards/jack_of_spades.png",
+  },
+  spadeQ: {
+    card: [12, 4],
+    image: "Pictures/decks_of_cards/queen_of_spades.png",
+  },
+  spadeK: {
+    card: [13, 4],
+    image: "Pictures/decks_of_cards/king_of_spades.png",
+  },
 
-  heartA: [1, 3],
-  heart2: [2, 3],
-  heart3: [3, 3],
-  heart4: [4, 3],
-  heart5: [5, 3],
-  heart6: [6, 3],
-  heart7: [7, 3],
-  heart8: [8, 3],
-  heart9: [9, 3],
-  heart10: [10, 3],
-  heartJ: [11, 3],
-  heartQ: [12, 3],
-  heartK: [13, 3],
+  heartA: { card: [1, 3], image: "Pictures/decks_of_cards/ace_of_hearts.png" },
+  heart2: { card: [2, 3], image: "Pictures/decks_of_cards/2_of_hearts.png" },
+  heart3: { card: [3, 3], image: "Pictures/decks_of_cards/3_of_hearts.png" },
+  heart4: { card: [4, 3], image: "Pictures/decks_of_cards/4_of_hearts.png" },
+  heart5: { card: [5, 3], image: "Pictures/decks_of_cards/5_of_hearts.png" },
+  heart6: { card: [6, 3], image: "Pictures/decks_of_cards/6_of_hearts.png" },
+  heart7: { card: [7, 3], image: "Pictures/decks_of_cards/7_of_hearts.png" },
+  heart8: { card: [8, 3], image: "Pictures/decks_of_cards/8_of_hearts.png" },
+  heart9: { card: [9, 3], image: "Pictures/decks_of_cards/9_of_hearts.png" },
+  heart10: { card: [10, 3], image: "Pictures/decks_of_cards/10_of_hearts.png" },
+  heartJ: {
+    card: [11, 3],
+    image: "Pictures/decks_of_cards/jack_of_hearts.png",
+  },
+  heartQ: {
+    card: [12, 3],
+    image: "Pictures/decks_of_cards/queen_of_hearts.png",
+  },
+  heartK: {
+    card: [13, 3],
+    image: "Pictures/decks_of_cards/king_of_hearts.png",
+  },
 
-  clubA: [1, 2],
-  club2: [2, 2],
-  club3: [3, 2],
-  club4: [4, 2],
-  club5: [5, 2],
-  club6: [6, 2],
-  club7: [7, 2],
-  club8: [8, 2],
-  club9: [9, 2],
-  club10: [10, 2],
-  clubJ: [11, 2],
-  clubQ: [12, 2],
-  clubK: [13, 2],
+  clubA: { card: [1, 2], image: "Pictures/decks_of_cards/ace_of_clubs.png" },
+  club2: { card: [2, 2], image: "Pictures/decks_of_cards/2_of_clubs.png" },
+  club3: { card: [3, 2], image: "Pictures/decks_of_cards/3_of_clubs.png" },
+  club4: { card: [4, 2], image: "Pictures/decks_of_cards/4_of_clubs.png" },
+  club5: { card: [5, 2], image: "Pictures/decks_of_cards/5_of_clubs.png" },
+  club6: { card: [6, 2], image: "Pictures/decks_of_cards/6_of_clubs.png" },
+  club7: { card: [7, 2], image: "Pictures/decks_of_cards/7_of_clubs.png" },
+  club8: { card: [8, 2], image: "Pictures/decks_of_cards/8_of_clubs.png" },
+  club9: { card: [9, 2], image: "Pictures/decks_of_cards/9_of_clubs.png" },
+  club10: { card: [10, 2], image: "Pictures/decks_of_cards/10_of_clubs.png" },
+  clubJ: { card: [11, 2], image: "Pictures/decks_of_cards/jack_of_clubs.png" },
+  clubQ: { card: [12, 2], image: "Pictures/decks_of_cards/queen_of_clubs.png" },
+  clubK: { card: [13, 2], image: "Pictures/decks_of_cards/king_of_clubs.png" },
 
-  diamondA: [1, 1],
-  diamond2: [2, 1],
-  diamond3: [3, 1],
-  diamond4: [4, 1],
-  diamond5: [5, 1],
-  diamond6: [6, 1],
-  diamond7: [7, 1],
-  diamond8: [8, 1],
-  diamond9: [9, 1],
-  diamond10: [10, 1],
-  diamondJ: [11, 1],
-  diamondQ: [12, 1],
-  diamondK: [13, 1],
+  diamondA: {
+    card: [1, 1],
+    image: "Pictures/decks_of_cards/jack_of_diamonds.png",
+  },
+  diamond2: {
+    card: [2, 1],
+    image: "Pictures/decks_of_cards/2_of_diamonds.png",
+  },
+  diamond3: {
+    card: [3, 1],
+    image: "Pictures/decks_of_cards/3_of_diamonds.png",
+  },
+  diamond4: {
+    card: [4, 1],
+    image: "Pictures/decks_of_cards/4_of_diamonds.png",
+  },
+  diamond5: {
+    card: [5, 1],
+    image: "Pictures/decks_of_cards/5_of_diamonds.png",
+  },
+  diamond6: {
+    card: [6, 1],
+    image: "Pictures/decks_of_cards/6_of_diamonds.png",
+  },
+  diamond7: {
+    card: [7, 1],
+    image: "Pictures/decks_of_cards/7_of_diamonds.png",
+  },
+  diamond8: {
+    card: [8, 1],
+    image: "Pictures/decks_of_cards/8_of_diamonds.png",
+  },
+  diamond9: {
+    card: [9, 1],
+    image: "Pictures/decks_of_cards/9_of_diamonds.png",
+  },
+  diamond10: {
+    card: [10, 1],
+    image: "Pictures/decks_of_cards/10_of_diamonds.png",
+  },
+  diamondJ: {
+    card: [11, 1],
+    image: "Pictures/decks_of_cards/jack_of_diamonds.png",
+  },
+  diamondQ: {
+    card: [12, 1],
+    image: "Pictures/decks_of_cards/queen_of_diamonds.png",
+  },
+  diamondK: {
+    card: [13, 1],
+    image: "Pictures/decks_of_cards/king_of_diamonds.png",
+  },
 };
 
 // Based cards
@@ -219,34 +276,6 @@ const player2TokenSelection = (event) => {
       player2CurrTokenAmt;
   }
 };
-
-// // combine functions together
-// const playerTokenSelection = (event) => {
-//   if(event.currentTarget === "player2CoinsSelections"){
-//     if (player2AddMinusToken === "+") {
-//     player2CurrTokenAmt += parseFloat(event.target.innerText);
-//   } else if (player2AddMinusToken === "-") {
-//     player2CurrTokenAmt -= parseFloat(event.target.innerText);
-//   }
-//  else
-//   if (player1AddMinusToken === "+") {
-//     player1CurrTokenAmt += parseFloat(event.target.innerText);
-//   }
-//   if (player1AddMinusToken === "-") {
-//     player1CurrTokenAmt -= pparseFloat(event.target.innerText);
-//   }
-
-//   if (player2CurrTokenAmt <= 0) {
-//     player2CurrTokenAmt = 0;
-//     document.querySelector("#player2PlayButton").innerText =
-//       player2CurrTokenAmt;
-//   } else if (player2CurrTokenAmt > player2TotalToken) {
-//     player2CurrTokenAmt = player2TotalToken;
-//   } else {
-//     document.querySelector("#player2PlayButton").innerText =
-//       player2CurrTokenAmt;
-//   }
-// };
 
 // toggle between add and minus
 const addMinus = (event) => {
@@ -413,12 +442,12 @@ const cardsSuitesFn = (array) => {
 
 // locate the card description via checking the each card array
 const displayCards = (array) => {
-  let card = "";
-  for (const [key, value] of Object.entries(cardTypes)) {
-    if (JSON.stringify(value) === JSON.stringify(array)) {
-      return (card = key);
+  for (const [cardName, cardKvp] of Object.entries(cardTypes)) {
+    if (JSON.stringify(cardKvp.card) === JSON.stringify(array)) {
+      return cardKvp.image;
     }
   }
+  return 1;
 };
 
 const tallyResults2Cards = () => {

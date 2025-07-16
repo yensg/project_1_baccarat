@@ -268,3 +268,31 @@ const cardsTotalFn = (array) => {
 };
 
 console.log(cardsTotalFn(nums));
+
+const imgChangekvp = {
+  spadeA: { cards: [1, 4], image: "Pictures/decks_of_cards/ace_of_spades.png" },
+  spade2: { cards: [2, 4], image: "Pictures/decks_of_cards/2_of_spades.png" },
+  spade3: { cards: [3, 4], image: "Pictures/decks_of_cards/3_of_spades.png" },
+};
+
+const picChange = (array) => {
+  for ([cardname, cardKvp] of Object.entries(imgChangekvp)) {
+    if (JSON.stringify(cardKvp.cards) === JSON.stringify(array)) {
+      return cardKvp.image;
+    }
+  }
+  return false; // good habit to put a value here for feedback loop
+};
+console.log(picChange([2, 4]));
+
+document.querySelector("#dealerCard1").src = picChange([2, 4]);
+
+// locate the card description via checking the each card array
+const displayCards = (array) => {
+  let card = "";
+  for (const [key, value] of Object.entries(cardTypes)) {
+    if (JSON.stringify(value) === JSON.stringify(array)) {
+      return (card = key);
+    }
+  }
+};

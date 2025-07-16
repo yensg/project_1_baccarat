@@ -48,6 +48,7 @@ body {
 
 .cards {
   border: 2px solid black;
+  max-width: 5rem;
 }
 
 #inGameButtons {
