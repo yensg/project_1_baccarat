@@ -14,17 +14,25 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <h1>Welcome to Huat Huat Baccarat!</h1>
+    <h1>BACCARAT</h1>
     <div id="dealer">
-      <p>Dealer</p>
+      <!-- <p>Dealer</p> -->
       <div id="dealerTable">
         <img
           src="Pictures/decks_of_cards/red_joker.png"
           class="cards"
           id="dealerCard1"
         />
-        <div class="cards" id="dealerCard2">card2</div>
-        <div class="cards" id="dealerCard3">card3</div>
+        <img
+          src="Pictures/decks_of_cards/red_joker.png"
+          class="cards"
+          id="dealerCard2"
+        />
+        <img
+          src="Pictures/decks_of_cards/red_joker.png"
+          class="cards"
+          id="dealerCard3"
+        />
       </div>
     </div>
     <div class="" id="message"></div>
@@ -32,9 +40,21 @@
       <div class="playerTable" id="player1">
         <p class="player" id="player1name">Player 1</p>
         <div id="cardTable">
-          <div class="cards" id="player1Card1">1 Spades</div>
-          <div class="cards" id="player1Card2">1 Spades</div>
-          <div class="cards" id="player1Card3">1 Spades</div>
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player1Card1"
+          />
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player1Card2"
+          />
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player1Card3"
+          />
         </div>
         <div id="inGameButtons">
           <button class="btn btn-primary" id="player1HitButton">HIT</button>
@@ -44,16 +64,17 @@
           <div id="leftDisplay">
             <div id="token">
               <p>Tokens:</p>
-              <label id="player1TokenDisplay">123</label>
+              <label id="player1TokenDisplay"></label>
+              <div id="addMinus">
+                <button class="btn btn-primary" id="player1AddMinus">+</button>
+              </div>
             </div>
-            <div id="addMinus">
-              <button class="btn btn-primary" id="player1AddMinus">+</button>
-            </div>
+
             <div id="player1CoinsSelections">
-              <button class="btn btn-primary" id="player1Coin5">5</button>
-              <button class="btn btn-primary" id="player1Coin20">20</button>
-              <button class="btn btn-primary" id="player1Coin10">10</button>
-              <button class="btn btn-primary" id="player1Coin50">50</button>
+              <div class="coins" id="player1Coin5">5</div>
+              <div class="coins" id="player1Coin10">10</div>
+              <div class="coins" id="player1Coin20">20</div>
+              <div class="coins" id="player1Coin50">50</div>
             </div>
           </div>
           <div id="play">
@@ -68,9 +89,21 @@
       <div class="playerTable" id="player2">
         <p class="player" id="player2name">Player 2</p>
         <div id="cardTable">
-          <div class="cards" id="player2Card1">1 Spades</div>
-          <div class="cards" id="player2Card2">1 Spades</div>
-          <div class="cards" id="player2Card3">1 Spades</div>
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player2Card1"
+          />
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player2Card2"
+          />
+          <img
+            src="Pictures/decks_of_cards/red_joker.png"
+            class="cards"
+            id="player2Card3"
+          />
         </div>
         <div class="player2" id="inGameButtons">
           <button class="btn btn-primary" id="player2HitButton">HIT</button>
@@ -80,16 +113,17 @@
           <div id="leftDisplay">
             <div id="token">
               <p>Tokens:</p>
-              <label id="player2TokenDisplay">123</label>
+              <label id="player2TokenDisplay"></label>
+              <div id="addMinus">
+                <button class="btn btn-primary" id="player2AddMinus">+</button>
+              </div>
             </div>
-            <div id="addMinus">
-              <button class="btn btn-primary" id="player2AddMinus">+</button>
-            </div>
+
             <div id="player2CoinsSelections">
-              <button class="btn btn-primary" id="player2Coin5">5</button>
-              <button class="btn btn-primary" id="player2Coin10">10</button>
-              <button class="btn btn-primary" id="player2Coin20">20</button>
-              <button class="btn btn-primary" id="player2Coin50">50</button>
+              <div class="coins" id="player2Coin5">5</div>
+              <div class="coins" id="player2Coin10">10</div>
+              <div class="coins" id="player2Coin20">20</div>
+              <div class="coins" id="player2Coin50">50</div>
             </div>
           </div>
           <div id="play">
