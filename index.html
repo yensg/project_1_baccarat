@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>project_1_baccarat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -57,8 +63,12 @@
           />
         </div>
         <div id="inGameButtons">
-          <button class="btn btn-primary" id="player1HitButton">HIT</button>
-          <button class="btn btn-primary" id="player1StayButton">STAY</button>
+          <button class="btn btn-danger btn-lg" id="player1HitButton">
+            Hit
+          </button>
+          <button class="btn btn-danger btn-lg" id="player1StayButton">
+            Stay
+          </button>
         </div>
         <div id="outGameButtons">
           <div id="leftDisplay">
@@ -66,7 +76,9 @@
               <p>Tokens:</p>
               <label id="player1TokenDisplay"></label>
               <div id="addMinus">
-                <button class="btn btn-primary" id="player1AddMinus">+</button>
+                <button class="btn btn-primary btn-lg" id="player1AddMinus">
+                  +
+                </button>
               </div>
             </div>
 
@@ -79,10 +91,12 @@
           </div>
           <div id="play">
             <div id="textForPlayButton">Play</div>
-            <button class="btn btn-primary" id="player1PlayButton">
+            <button class="btn btn-light btn-lg" id="player1PlayButton">
               &nbsp;
             </button>
-            <button class="btn btn-primary" id="player1NoPlayButton">No</button>
+            <button class="btn btn-dark btn-lg" id="player1NoPlayButton">
+              Fold
+            </button>
           </div>
         </div>
       </div>
@@ -106,8 +120,12 @@
           />
         </div>
         <div class="player2" id="inGameButtons">
-          <button class="btn btn-primary" id="player2HitButton">HIT</button>
-          <button class="btn btn-primary" id="player2StayButton">STAY</button>
+          <button class="btn btn-danger btn-lg" id="player2HitButton">
+            Hit
+          </button>
+          <button class="btn btn-danger btn-lg" id="player2StayButton">
+            Stay
+          </button>
         </div>
         <div id="outGameButtons">
           <div id="leftDisplay">
@@ -115,7 +133,9 @@
               <p>Tokens:</p>
               <label id="player2TokenDisplay"></label>
               <div id="addMinus">
-                <button class="btn btn-primary" id="player2AddMinus">+</button>
+                <button class="btn btn-primary btn-lg" id="player2AddMinus">
+                  +
+                </button>
               </div>
             </div>
 
@@ -128,14 +148,16 @@
           </div>
           <div id="play">
             <div id="textForPlayButton">Play</div>
-            <button class="btn btn-primary" id="player2PlayButton">
+            <button class="btn btn-light btn-lg" id="player2PlayButton">
               &nbsp;
             </button>
-            <button class="btn btn-primary" id="player2NoPlayButton">No</button>
+            <button class="btn btn-dark btn-lg" id="player2NoPlayButton">
+              Fold
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <button id="reset">reset</button>
+    <button class="btn btn-outline-success" id="reset">NEW LUCK!</button>
   </body>
 </html>

@@ -9,6 +9,7 @@ body {
   width: 1536px;
   margin: 0px;
   justify-content: center;
+  font-family: "DM Serif Text", serif;
 }
 
 /* #dealer {
@@ -82,6 +83,7 @@ h1 {
   max-width: 7rem;
   object-fit: cover; /* prevents distortion */
   display: block;
+  visibility: ;
 }
 
 #player1 {
@@ -97,14 +99,14 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -40px;
+  margin-top: -26px;
 }
 
 #inGameButtons {
   display: flex;
   gap: 10px;
   margin: 0px;
-  margin-top: -40px;
+  margin-top: -37px;
 }
 
 #outGameButtons {
@@ -117,7 +119,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 5px solid black;
 }
 
 #token {
@@ -128,8 +129,10 @@ h1 {
   font-size: 30px;
   align-items: center;
 }
+
 p {
   margin: 0px;
+  /* font-family: "Funnel Sans", sans-serif; */
 }
 #addMinus {
   display: flex;
@@ -137,6 +140,23 @@ p {
   gap: 10px;
   margin: 10px;
 }
+#player1AddMinus {
+  /* height: auto; */
+  font-size: 20px;
+  font-weight: bold;
+}
+#player1AddMinus:hover {
+  box-shadow: 0 0 15px 5px blue;
+}
+#player2AddMinus {
+  /* height: auto; */
+  font-size: 20px;
+  font-weight: bold;
+}
+#player2AddMinus:hover {
+  box-shadow: 0 0 15px 5px blue;
+}
+
 .coins {
   font-size: 30px;
   color: white;
@@ -159,6 +179,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player1Coin10 {
   background-image: url(Pictures/10Chip.png);
@@ -166,6 +187,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player1Coin20 {
   background-image: url(Pictures/20Chip.png);
@@ -173,6 +195,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player1Coin50 {
   background-image: url(Pictures/50Chip.png);
@@ -180,6 +203,19 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
+}
+#player1Coin5:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player1Coin10:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player1Coin20:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player1Coin50:hover {
+  box-shadow: 0 0 15px 5px white;
 }
 
 #player2CoinsSelections {
@@ -192,6 +228,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player2Coin10 {
   background-image: url(Pictures/10Chip.png);
@@ -199,6 +236,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player2Coin20 {
   background-image: url(Pictures/20Chip.png);
@@ -206,6 +244,7 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
 }
 #player2Coin50 {
   background-image: url(Pictures/50Chip.png);
@@ -213,39 +252,90 @@ p {
   background-repeat: no-repeat;
   height: 4.5rem;
   width: 4.5rem;
+  border-radius: 50%; /* Make it a perfect circle */
+}
+#player2Coin5:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player2Coin10:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player2Coin20:hover {
+  box-shadow: 0 0 15px 5px white;
+}
+#player2Coin50:hover {
+  box-shadow: 0 0 15px 5px white;
 }
 
 #play {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 5px solid black;
   color: white;
   font-size: 20px;
 }
 #player1PlayButton {
-  color: white;
+  color: black;
+  height: 50px;
+  width: 63px;
   font-size: 20px;
 }
+#player1PlayButton:hover {
+  box-shadow: 0 0 15px 5px white;
+}
 #player2PlayButton {
-  color: white;
+  color: black;
+  height: 50px;
+  width: 63px;
   font-size: 20px;
+}
+#player2PlayButton:hover {
+  box-shadow: 0 0 15px 5px white;
 }
 
 #player1NoPlayButton {
   color: white;
   font-size: 20px;
 }
+#player2NoPlayButton:hover {
+  box-shadow: 0 0 15px 5px black;
+}
 #player2NoPlayButton {
   color: white;
   font-size: 20px;
 }
+#player2NoPlayButton:hover {
+  box-shadow: 0 0 15px 5px black;
+}
 
-#player1PlayButton {
+#player2HitButton {
+  color: white;
+  font-size: 20px;
 }
-#player2PlayButton {
+#player2HitButton:hover {
+  box-shadow: 0 0 15px 5px red;
 }
-#player1NoPlayButton {
+
+#player2StayButton {
+  color: white;
+  font-size: 20px;
 }
-#player2NoPlayButton {
+#player2StayButton:hover {
+  box-shadow: 0 0 15px 5px red;
+}
+
+#player1HitButton {
+  color: white;
+  font-size: 20px;
+}
+#player1HitButton:hover {
+  box-shadow: 0 0 15px 5px red;
+}
+
+#player1StayButton {
+  color: white;
+  font-size: 20px;
+}
+#player1StayButton:hover {
+  box-shadow: 0 0 15px 5px red;
 }

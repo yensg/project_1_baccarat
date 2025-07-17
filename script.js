@@ -370,13 +370,13 @@ const noPlaySelection = (event) => {
   if (event.target.id === "player1NoPlayButton") {
     player1PlayingStatus = "noPlay";
     turn = "player2";
-    document.querySelector("#player1PlayButton").style.display = "none";
-    document.querySelector("#player1NoPlayButton").style.display = "none";
+    document.querySelector("#player1PlayButton").style.visibility = "hidden";
+    document.querySelector("#player1NoPlayButton").style.visibility = "hidden";
   } else if (event.target.id === "player2NoPlayButton") {
     player2PlayingStatus = "noPlay";
     turn = "player1";
-    document.querySelector("#player2PlayButton").style.display = "none";
-    document.querySelector("#player2NoPlayButton").style.display = "none";
+    document.querySelector("#player2PlayButton").style.visibility = "hidden";
+    document.querySelector("#player2NoPlayButton").style.visibility = "hidden";
   }
   if (
     (player1PlayingStatus === "play" && player2PlayingStatus === "noPlay") ||
@@ -392,12 +392,12 @@ const player1Play = () => {
   }
   if (player1TotalToken === 0) {
     player1PlayingStatus = "noPlay";
-    document.querySelector("#player1PlayButton").style.display = "none";
+    document.querySelector("#player1PlayButton").style.visibility = "hidden";
   }
   player1PlayingStatus = "play";
   player1TotalToken -= player1CurrTokenAmt;
   document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
-  document.querySelector("#player1NoPlayButton").style.display = "none";
+  document.querySelector("#player1NoPlayButton").style.visibility = "hidden";
   if (player2PlayingStatus !== "") {
     startGame();
   }
@@ -409,12 +409,12 @@ const player2Play = () => {
   }
   if (player2TotalToken === 0) {
     player2PlayingStatus = "noPlay";
-    document.querySelector("#player2PlayButton").style.display = "none";
+    document.querySelector("#player2PlayButton").style.visibility = "hidden";
   }
   player2PlayingStatus = "play";
   player2TotalToken -= player2CurrTokenAmt;
   document.querySelector("#player2TokenDisplay").innerText = player2TotalToken;
-  document.querySelector("#player2NoPlayButton").style.display = "none";
+  document.querySelector("#player2NoPlayButton").style.visibility = "hidden";
   if (player1PlayingStatus !== "") {
     startGame();
   }
@@ -471,14 +471,14 @@ const tallyResults2Cards = () => {
         player1TotalToken += 2 * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#player1Card3").style.display = "none";
+        document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player1CurrTokenAmt + "!";
       } else {
         player1TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#player1Card3").style.display = "none";
+        document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt +
@@ -497,7 +497,7 @@ const tallyResults2Cards = () => {
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#dealerCard3").style.display = "none";
+        document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -531,14 +531,14 @@ const tallyResults2Cards = () => {
         player2TotalToken += 2 * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#player2Card3").style.display = "none";
+        document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player2CurrTokenAmt + "!";
       } else {
         player2TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#player2Card3").style.display = "none";
+        document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt +
@@ -555,7 +555,7 @@ const tallyResults2Cards = () => {
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#dealerCard3").style.display = "none";
+        document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -654,7 +654,7 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
-        document.querySelector("#player1Card3").style.display = "none";
+        document.querySelector("#player1Card3").style.visibility = "hidden";
       }
     }
   }
@@ -707,7 +707,7 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
-        document.querySelector("#player2Card3").style.display = "none";
+        document.querySelector("#player2Card3").style.visibility = "hidden";
       }
     }
   }
@@ -837,7 +837,7 @@ const tallyResults3Cards = () => {
       dealerP1ResultStatus = "won";
     }
     if ((player1Cards.length = 3)) {
-      document.querySelector("#player2Card3").style.display = "";
+      document.querySelector("#player2Card3").style.visibility = "";
     }
   }
 
@@ -887,7 +887,7 @@ const tallyResults3Cards = () => {
       dealerP2ResultStatus = "won";
     }
     if ((player2Cards.length = 3)) {
-      document.querySelector("#player2Card3").style.display = "";
+      document.querySelector("#player2Card3").style.visibility = "";
     }
   }
   if (dealerP1ResultStatus !== "" && dealerP2ResultStatus !== "") {
@@ -944,7 +944,7 @@ const endGame = () => {
   // document.querySelector("#dealerCard1").innerText = "blank";
   // document.querySelector("#dealerCard2").innerText = "blank";
   // document.querySelector("#dealerCard3").innerText = "blank";
-  // document.querySelector("#dealerCard3").style.display = "";
+  // document.querySelector("#dealerCard3").style.visibility = "";
 
   turn = "";
   randomIndex = 0;
@@ -967,9 +967,9 @@ const endGame = () => {
   // document.querySelector("#player1Card1").innerText = "blank";
   // document.querySelector("#player1Card2").innerText = "blank";
   // document.querySelector("#player1Card3").innerText = "blank";
-  document.querySelector("#player1PlayButton").style.display = "";
-  document.querySelector("#player1NoPlayButton").style.display = "";
-  // document.querySelector("#player1Card3").style.display = "";
+  document.querySelector("#player1PlayButton").style.visibility = "";
+  document.querySelector("#player1NoPlayButton").style.visibility = "";
+  // document.querySelector("#player1Card3").style.visibility = "";
   player1AddMinusToken = "+";
 
   player2Cards = [];
@@ -989,9 +989,9 @@ const endGame = () => {
   // document.querySelector("#player2Card1").innerText = "blank";
   // document.querySelector("#player2Card2").innerText = "blank";
   // document.querySelector("#player2Card3").innerText = "blank";
-  document.querySelector("#player2PlayButton").style.display = "";
-  document.querySelector("#player2NoPlayButton").style.display = "";
-  // document.querySelector("#player2Card3").style.display = "";
+  document.querySelector("#player2PlayButton").style.visibility = "";
+  document.querySelector("#player2NoPlayButton").style.visibility = "";
+  // document.querySelector("#player2Card3").style.visibility = "";
   player2AddMinusToken = "+";
 };
 
