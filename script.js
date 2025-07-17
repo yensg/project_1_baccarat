@@ -999,6 +999,14 @@ const endGame = () => {
   player2AddMinusToken = "+";
 };
 
+const webButton = (event) => {
+  if (event.target.id === "rules") {
+    document.querySelector("#instructions").style.display = "grid";
+  } else if (event.target.id === "enterGame") {
+    document.querySelector("#instructions").style.display = "none";
+  }
+};
+
 // Event Listeners
 document.querySelector("#player1AddMinus").addEventListener("click", addMinus);
 document.querySelector("#player2AddMinus").addEventListener("click", addMinus);
@@ -1030,6 +1038,9 @@ document.querySelector("#player1HitButton").addEventListener("click", midGame);
 document.querySelector("#player2HitButton").addEventListener("click", midGame);
 document.querySelector("#player1StayButton").addEventListener("click", midGame);
 document.querySelector("#player2StayButton").addEventListener("click", midGame);
+
+document.querySelector("#enterGame").addEventListener("click", webButton);
+document.querySelector("#rules").addEventListener("click", webButton);
 
 // document
 //   .querySelector("#player2NoPlayButton")

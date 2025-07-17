@@ -31,13 +31,27 @@ h2 {
   grid-column: 4 / span 20;
   grid-row: 4 / span 20;
   z-index: 100;
-  display: none;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(26, 1fr);
+  grid-template-rows: repeat(26, 1fr);
   color: white;
-  justify-content: center;
-  align-items: center;
+  font-size: 1.2rem;
 }
 #instructionWords {
+  grid-column: 9 / span 13;
+  grid-row: 9 / span 8;
+}
+#enterGame {
+  grid-column: 12 / span 4;
+  grid-row: 22 / span 3;
+  font-size: 30px;
+}
+
+#rules {
+  position: absolute;
+  /* grid-column: 25 / span 1;
+  grid-row: 2 / span 1; */
+  z-index: 100;
 }
 
 #reset {
