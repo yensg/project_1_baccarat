@@ -128,7 +128,9 @@ h1 {
   font-size: 30px;
   align-items: center;
 }
-
+p {
+  margin: 0px;
+}
 #addMinus {
   display: flex;
   align-items: center;
