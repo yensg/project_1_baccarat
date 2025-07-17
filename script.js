@@ -236,13 +236,14 @@ const totalCards = [
 // Decides how much tokens to play against total token on hand
 const player1TokenSelection = (event) => {
   player1SelectedTokenType = parseFloat(event.target.innerText);
+
   if (player1AddMinusToken === "+") {
     player1CurrTokenAmt += player1SelectedTokenType;
   }
+
   if (player1AddMinusToken === "-") {
     player1CurrTokenAmt -= player1SelectedTokenType;
   }
-  // add else
 
   if (player1CurrTokenAmt <= 0) {
     player1CurrTokenAmt = 0;
@@ -258,6 +259,7 @@ const player1TokenSelection = (event) => {
 
 const player2TokenSelection = (event) => {
   player2SelectedTokenType = parseFloat(event.target.innerText);
+
   if (player2AddMinusToken === "+") {
     player2CurrTokenAmt += player2SelectedTokenType;
   }
@@ -265,6 +267,7 @@ const player2TokenSelection = (event) => {
   if (player2AddMinusToken === "-") {
     player2CurrTokenAmt -= player2SelectedTokenType;
   }
+
   if (player2CurrTokenAmt <= 0) {
     player2CurrTokenAmt = 0;
     document.querySelector("#player2PlayButton").innerText =
@@ -318,6 +321,10 @@ const startGame = () => {
   document.querySelector("#player1Card3").style.visibility = "hidden";
   document.querySelector("#player2Card3").style.visibility = "hidden";
   document.querySelector("#dealerCard3").style.visibility = "hidden";
+  document.querySelector("#player1HitButton").style.visibility = "";
+  document.querySelector("#player1StayButton").style.visibility = "";
+  document.querySelector("#player2HitButton").style.visibility = "";
+  document.querySelector("#player2StayButton").style.visibility = "";
 
   // generate first card
   if (player1PlayingStatus === "play") {
@@ -370,7 +377,6 @@ const dealerDeal3Cards = () => {
 };
 
 const noPlaySelection = (event) => {
-  // have to put ""? how about the inner.Text?
   if (event.target.id === "player1NoPlayButton") {
     player1PlayingStatus = "noPlay";
     turn = "player2";
@@ -382,6 +388,7 @@ const noPlaySelection = (event) => {
     document.querySelector("#player2PlayButton").style.visibility = "hidden";
     document.querySelector("#player2NoPlayButton").style.visibility = "hidden";
   }
+
   if (
     (player1PlayingStatus === "play" && player2PlayingStatus === "noPlay") ||
     (player2PlayingStatus === "play" && player1PlayingStatus === "noPlay")
@@ -431,6 +438,7 @@ const cardsValueFn = (array) => {
   });
 };
 
+// Function to get total of the cards' values
 const cardsTotalFn = (array) => {
   return array.reduce((total, value) => {
     if (value === 11 || value === 12 || value === 13) {
@@ -506,11 +514,6 @@ const tallyResults2Cards = () => {
           "-" +
           player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
           "!";
-        console.log(player1CurrTokenAmt);
-        console.log(tallyOdds(dealerCardsValue, dealerCardsSuites));
-        console.log(
-          player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites)
-        );
       } else {
         messages.innerHTML += "-" + player1CurrTokenAmt;
       }
@@ -564,11 +567,6 @@ const tallyResults2Cards = () => {
           "-" +
           player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
           "!";
-        console.log(player2CurrTokenAmt);
-        console.log(tallyOdds(dealerCardsValue, dealerCardsSuites));
-        console.log(
-          player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites)
-        );
       } else {
         messages.innerHTML += "-" + player2CurrTokenAmt;
       }
@@ -608,14 +606,9 @@ const tallyOdds = (array1, array2) => {
 };
 
 const midGame = (event) => {
-  // console.log(player1PlayingStatus); // 3 play or noPlay or ""
-  // console.log(player1ResultStatus); // 4 win or tie or lost or ""
-  // console.log(dealerP1ResultStatus); //2 win or ""
-  // console.log(dealerP2ResultStatus);
-  // console.log(player1HitOrStay); //2 hit or stay
-
+  messages.innerText = "";
   if (player1PlayingStatus === "play" && player1ResultStatus === "") {
-    messages.innerText = "";
+    // messages.innerText = "";
     if (event.target.id === "player1HitButton") {
       player1HitOrStay = "hit";
       player1Deal3Cards();
@@ -656,7 +649,7 @@ const midGame = (event) => {
         player2ResultStatus === "won" ||
         player2PlayingStatus === "noPlay"
       ) {
-        messages.innerText = "";
+        // messages.innerText = "";
         dealerDeal3Cards();
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
@@ -668,11 +661,10 @@ const midGame = (event) => {
   }
   // cannot do else if here because we are checking a "fixed variables" so have to spilt it
   if (player2PlayingStatus === "play" && player2ResultStatus === "") {
-    messages.innerText = "";
+    // messages.innerText = "";
     if (event.target.id === "player2HitButton") {
       player2HitOrStay = "hit";
       player2Deal3Cards();
-      console.log(player2Cards);
       document.querySelector("#player2Card3").src = displayCards(
         player2Cards[2]
       );
@@ -713,7 +705,7 @@ const midGame = (event) => {
         player1ResultStatus === "won" ||
         player1PlayingStatus === "noPlay"
       ) {
-        messages.innerText = "";
+        // messages.innerText = "";
         dealerDeal3Cards();
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
@@ -765,37 +757,10 @@ const midGame = (event) => {
         player1PlayingStatus === "noPlay"))
   ) {
     tallyResults3Cards();
-    // console.log(1);
   }
 };
 
 const tallyResults3Cards = () => {
-  //   messages.innerText = "";
-  // console.log(player1PlayingStatus); // 3 play or noPlay or ""
-  // console.log(player1ResultStatus); // 4 win or tie or lost or ""
-  // console.log(dealerP1ResultStatus); //2 win or ""
-  // console.log(dealerP2ResultStatus);
-
-  // console.log(player1HitOrStay); //2 hit or stay
-  // console.log(player2HitOrStay);
-  console.warn(player1Cards);
-  console.log(player1CardsTotal);
-  console.warn(player1CardsTotal % 10);
-  console.log(player1CardsValue);
-  console.log(player1CardsSuites);
-
-  console.warn(player2Cards);
-  console.log(player2CardsTotal);
-  console.warn(player2CardsTotal % 10);
-  console.log(player2CardsValue);
-  console.log(player2CardsSuites);
-
-  console.warn(dealerCards);
-  console.log(dealerCardsTotal);
-  console.warn(dealerCardsTotal % 10);
-  console.log(dealerCardsValue);
-  console.log(dealerCardsSuites);
-
   if (player1ResultStatus === "" && player1PlayingStatus === "play") {
     dealerP1ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === player1CardsTotal % 10) {
@@ -825,9 +790,9 @@ const tallyResults3Cards = () => {
     } else if (dealerCardsTotal % 10 > player1CardsTotal % 10) {
       messages.innerHTML += "Player 1 lost!" + "\n";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
-        player1TotalToken -
+        player1TotalToken -=
           player1CurrTokenAmt *
-            (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
+          (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
         messages.innerHTML +=
@@ -875,9 +840,9 @@ const tallyResults3Cards = () => {
       // if (player2PlayingStatus === "play") {
       messages.innerHTML += "Player 2 lost!" + "\n";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
-        player2TotalToken -
+        player2TotalToken -=
           player2CurrTokenAmt *
-            (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
+          (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
         messages.innerHTML +=
@@ -934,8 +899,6 @@ const tallyOddsFinal = (array1, array2) => {
 
 const reset = (event) => {
   endGame();
-  //   player1TotalToken = 1000;
-  //   player2TotalToken = 1000;
 };
 
 const endGame = () => {
@@ -945,10 +908,6 @@ const endGame = () => {
   dealerCardsSuites = "";
   dealerP2ResultStatus = "";
   dealerP1ResultStatus = "";
-  // document.querySelector("#dealerCard1").innerText = "blank";
-  // document.querySelector("#dealerCard2").innerText = "blank";
-  // document.querySelector("#dealerCard3").innerText = "blank";
-  // document.querySelector("#dealerCard3").style.visibility = "";
 
   turn = "";
   randomIndex = 0;
@@ -965,15 +924,10 @@ const endGame = () => {
   player1PlayingStatus = "";
   player1SelectedTokenType = 0;
   player1CurrTokenAmt = 0;
-  //   player1TotalToken = 1000;
   document.querySelector("#player1TokenDisplay").innerText = player1TotalToken;
   document.querySelector("#player1PlayButton").innerText = "";
-  // document.querySelector("#player1Card1").innerText = "blank";
-  // document.querySelector("#player1Card2").innerText = "blank";
-  // document.querySelector("#player1Card3").innerText = "blank";
   document.querySelector("#player1PlayButton").style.visibility = "";
   document.querySelector("#player1NoPlayButton").style.visibility = "";
-  // document.querySelector("#player1Card3").style.visibility = "";
   player1AddMinusToken = "+";
 
   player2Cards = [];
@@ -987,16 +941,16 @@ const endGame = () => {
   player2PlayingStatus = "";
   player2SelectedTokenAmt = 0;
   player2CurrTokenAmt = 0;
-  //   player2TotalToken = 1000;
   document.querySelector("#player2TokenDisplay").innerText = player2TotalToken;
   document.querySelector("#player2PlayButton").innerText = "";
-  // document.querySelector("#player2Card1").innerText = "blank";
-  // document.querySelector("#player2Card2").innerText = "blank";
-  // document.querySelector("#player2Card3").innerText = "blank";
   document.querySelector("#player2PlayButton").style.visibility = "";
   document.querySelector("#player2NoPlayButton").style.visibility = "";
-  // document.querySelector("#player2Card3").style.visibility = "";
   player2AddMinusToken = "+";
+  messages.innerHTML += "<br/> Game ended!";
+  document.querySelector("#player1HitButton").style.visibility = "hidden";
+  document.querySelector("#player1StayButton").style.visibility = "hidden";
+  document.querySelector("#player2HitButton").style.visibility = "hidden";
+  document.querySelector("#player2StayButton").style.visibility = "hidden";
 };
 
 const webButton = (event) => {
@@ -1041,9 +995,3 @@ document.querySelector("#player2StayButton").addEventListener("click", midGame);
 
 document.querySelector("#enterGame").addEventListener("click", webButton);
 document.querySelector("#rules").addEventListener("click", webButton);
-
-// document
-//   .querySelector("#player2NoPlayButton")
-//   .addEventListener("click", function (event) {
-//     console.log(event.target, event.currentTarget);
-//   });
