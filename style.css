@@ -77,14 +77,14 @@ h2 {
 
 #message {
   grid-column: 12 / span 4;
-  grid-row: 17 / span 6;
+  grid-row: 16 / span 6;
   padding: 30px;
   width: 240px;
   height: 280px;
   font-size: 20px;
   justify-content: center;
   color: white;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 #playersTable {

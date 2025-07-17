@@ -10,14 +10,12 @@ let dealerP1ResultStatus = "";
 let turn = "";
 const messages = document.querySelector("#message");
 let randomIndex = 0;
-let cardsValue;
 
 // Player 1
 let player1Cards = [];
 let player1CardsValue = "";
 let player1CardsTotal = "";
 let player1CardsSuites = "";
-let player1ActionSelection = "";
 let player1ResultStatus = "";
 let player1HitOrStay = "";
 
@@ -33,7 +31,6 @@ let player2Cards = [];
 let player2CardsValue = "";
 let player2CardsTotal = "";
 let player2CardsSuites = "";
-let player2ActionSelection = "";
 let player2ResultStatus = "";
 let player2HitOrStay = "";
 
@@ -394,6 +391,11 @@ const noPlaySelection = (event) => {
     (player2PlayingStatus === "play" && player1PlayingStatus === "noPlay")
   ) {
     startGame();
+  } else if (
+    player1PlayingStatus === "noPlay" &&
+    player2PlayingStatus === "noPlay"
+  ) {
+    endGame();
   }
 };
 
@@ -472,25 +474,23 @@ const tallyResults2Cards = () => {
     //if player1 same as dealer, tie
     dealerP1ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
-      messages.innerHTML += "Player 1 tie!" + "\n";
+      messages.innerHTML += "<br/>Player 1 tie!" + "\n";
       player1ResultStatus = "tie";
       player1TotalToken += player1CurrTokenAmt;
     } else {
       //otherwise player1 won
-      messages.innerHTML += "Player 1 won!" + "\n";
+      messages.innerHTML += "<br/>Player 1 won!" + "\n";
       player1ResultStatus = "won";
       if (tallyOdds(player1CardsValue, player1CardsSuites) === 2) {
         player1TotalToken += 2 * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        // document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player1CurrTokenAmt + "!";
       } else {
         player1TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        // document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt +
@@ -502,14 +502,13 @@ const tallyResults2Cards = () => {
     // if player1 selected to play,
     if (player1PlayingStatus === "play") {
       player1ResultStatus = "lost";
-      messages.innerHTML += "Player 1 lost!" + "\n";
+      messages.innerHTML += "<br/>Player 1 lost!" + "\n";
       if (tallyOdds(dealerCardsValue, dealerCardsSuites) !== 2) {
         player1TotalToken -
           player1CurrTokenAmt *
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        // document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -522,30 +521,28 @@ const tallyResults2Cards = () => {
     // if player1 not 9/8 and deler not 9/8, and if player1 playing then means need 3rd card. so pass the turn to player2.
   } else if (player1PlayingStatus === "play") {
     turn = "player1";
-    messages.innerHTML += "Player 1, Choose your selection!" + "\n";
+    messages.innerHTML += "<br/>Player 1, Choose your selection!" + "\n";
   }
 
   if (player2CardsTotal % 10 === 9 || player2CardsTotal % 10 === 8) {
     dealerP2ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
-      messages.innerHTML += "Player 2 tie!" + "\n";
+      messages.innerHTML += "<br/>Player 2 tie!" + "\n";
       player2ResultStatus = "tie";
       player2TotalToken += player2CurrTokenAmt;
     } else {
-      messages.innerHTML += "Player 2 won!" + "\n";
+      messages.innerHTML += "<br/>Player 2 won!" + "\n";
       player2ResultStatus = "won";
       if (tallyOdds(dealerCardsValue, dealerCardsSuites) === 2) {
         player2TotalToken += 2 * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        // document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player2CurrTokenAmt + "!";
       } else {
         player2TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        // document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt +
@@ -555,14 +552,13 @@ const tallyResults2Cards = () => {
   } else if (dealerCardsTotal % 10 === 9 || dealerCardsTotal % 10 === 8) {
     if (player2PlayingStatus === "play") {
       player2ResultStatus = "lost";
-      messages.innerHTML += "Player 2 lost!" + "\n";
+      messages.innerHTML += "<br/>Player 2 lost!" + "\n";
       if (tallyOdds(dealerCardsValue, dealerCardsSuites) !== 2) {
         player2TotalToken -
           player2CurrTokenAmt *
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        // document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -574,7 +570,7 @@ const tallyResults2Cards = () => {
     }
   } else if (player2PlayingStatus === "play") {
     turn = "player2";
-    messages.innerHTML += "Player 2, Choose your selection!" + "\n";
+    messages.innerHTML += "<br/>Player 2, Choose your selection!" + "\n";
   }
   // when to end the game
   if (
@@ -587,7 +583,9 @@ const tallyResults2Cards = () => {
     (player2ResultStatus === "tie" && player1PlayingStatus === "noPlay") ||
     (player1ResultStatus === "tie" && player2PlayingStatus === "noPlay") ||
     (player1ResultStatus === "tie" && player2ResultStatus === "lost") ||
-    (player2ResultStatus === "tie" && player1ResultStatus === "lost")
+    (player2ResultStatus === "tie" && player1ResultStatus === "lost") ||
+    (player1ResultStatus === "lost" && player2PlayingStatus === "noPlay") ||
+    (player2ResultStatus === "lost" && player1PlayingStatus === "noPlay")
   ) {
     endGame();
   }
@@ -621,7 +619,7 @@ const midGame = (event) => {
         player2ResultStatus === "" &&
         player2Cards.length === 2
       ) {
-        messages.innerText = "Player 2, Choose your selection!";
+        messages.innerHTML = "<br/>Player 2, Choose your selection!";
       } else {
         messages.innerText = "";
         dealerDeal3Cards();
@@ -644,7 +642,7 @@ const midGame = (event) => {
         player2ResultStatus === "" &&
         player2Cards.length === 2
       ) {
-        messages.innerText = "Player 2, Choose your selection!";
+        messages.innerHTML = "<br/>Player 2, Choose your selection!";
       } else if (
         player2ResultStatus === "won" ||
         player2PlayingStatus === "noPlay"
@@ -655,7 +653,6 @@ const midGame = (event) => {
           dealerCards[2]
         );
         document.querySelector("#dealerCard3").style.visibility = "";
-        // document.querySelector("#player1Card3").style.visibility = "hidden";
       }
     }
   }
@@ -674,7 +671,7 @@ const midGame = (event) => {
         player1ResultStatus === "" &&
         player1Cards.length === 2
       ) {
-        messages.innerText = "Player 1, Choose your selection!";
+        messages.innerHTML = "<br/>Player 1, Choose your selection!";
       } else {
         messages.innerText = "";
         dealerDeal3Cards();
@@ -697,21 +694,16 @@ const midGame = (event) => {
         player1ResultStatus === "" &&
         player1Cards.length === 2
       ) {
-        messages.innerText = "Player 1, Choose your selection!";
+        messages.innerHTML = "<br/>Player 1, Choose your selection!";
       } else if (
-        // (player1PlayingStatus === "play" &&
-        //   player1ResultStatus === "" &&
-        //   player1Cards.length === 2) ||
         player1ResultStatus === "won" ||
         player1PlayingStatus === "noPlay"
       ) {
-        // messages.innerText = "";
         dealerDeal3Cards();
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
         document.querySelector("#dealerCard3").style.visibility = "";
-        // document.querySelector("#player2Card3").style.visibility = "hidden";
       }
     }
   }
@@ -764,11 +756,11 @@ const tallyResults3Cards = () => {
   if (player1ResultStatus === "" && player1PlayingStatus === "play") {
     dealerP1ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === player1CardsTotal % 10) {
-      messages.innerHTML += "Player 1 tie!" + "\n";
+      messages.innerHTML += "<br/>Player 1 tie!" + "\n";
       player1ResultStatus = "tie";
       player1TotalToken += player1CurrTokenAmt;
     } else if (player1CardsTotal % 10 > dealerCardsTotal % 10) {
-      messages.innerHTML += "Player 1 won!" + "\n";
+      messages.innerHTML += "<br/>Player 1 won!" + "\n";
       player1ResultStatus = "won";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 2) {
         player1TotalToken += 2 * player1CurrTokenAmt;
@@ -788,7 +780,8 @@ const tallyResults3Cards = () => {
           "!";
       }
     } else if (dealerCardsTotal % 10 > player1CardsTotal % 10) {
-      messages.innerHTML += "Player 1 lost!" + "\n";
+      messages.innerHTML += "<br/>Player 1 lost!" + "\n";
+      player1ResultStatus = "lost";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
         player1TotalToken -=
           player1CurrTokenAmt *
@@ -813,11 +806,11 @@ const tallyResults3Cards = () => {
   if (player2ResultStatus === "" && player2PlayingStatus === "play") {
     dealerP2ResultStatus = "lostOrTie";
     if (dealerCardsTotal % 10 === player2CardsTotal % 10) {
-      messages.innerHTML += "Player 2 tie!" + "\n";
+      messages.innerHTML += "<br/>Player 2 tie!" + "\n";
       player2ResultStatus = "tie";
       player2TotalToken += player2CurrTokenAmt;
     } else if (player2CardsTotal % 10 > dealerCardsTotal % 10) {
-      messages.innerHTML += "Player 2 won!" + "\n";
+      messages.innerHTML += "<br/>Player 2 won!" + "\n";
       player2ResultStatus = "won";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) === 2) {
         player2TotalToken += 2 * player2CurrTokenAmt;
@@ -837,8 +830,8 @@ const tallyResults3Cards = () => {
           "!";
       }
     } else if (dealerCardsTotal % 10 > player2CardsTotal % 10) {
-      // if (player2PlayingStatus === "play") {
-      messages.innerHTML += "Player 2 lost!" + "\n";
+      messages.innerHTML += "<br/>Player 2 lost!" + "\n";
+      player2ResultStatus = "lost";
       if (tallyOddsFinal(dealerCardsValue, dealerCardsSuites) !== 2) {
         player2TotalToken -=
           player2CurrTokenAmt *
@@ -859,7 +852,15 @@ const tallyResults3Cards = () => {
       document.querySelector("#player2Card3").style.visibility = "";
     }
   }
-  if (dealerP1ResultStatus !== "" && dealerP2ResultStatus !== "") {
+  if (
+    (dealerP1ResultStatus !== "" && dealerP2ResultStatus !== "") ||
+    (player1ResultStatus === "won" && player2PlayingStatus === "noPlay") ||
+    (player2ResultStatus === "won" && player1PlayingStatus === "noPlay") ||
+    (player1ResultStatus === "lost" && player2PlayingStatus === "noPlay") ||
+    (player2ResultStatus === "lost" && player1PlayingStatus === "noPlay") ||
+    (player1ResultStatus === "tie" && player2PlayingStatus === "noPlay") ||
+    (player2ResultStatus === "tie" && player1PlayingStatus === "noPlay")
+  ) {
     endGame();
   }
 };
@@ -911,13 +912,11 @@ const endGame = () => {
 
   turn = "";
   randomIndex = 0;
-  cardsValue;
 
   player1Cards = [];
   player1CardsValue = "";
   player1CardsTotal = "";
   player1CardsSuites = "";
-  player1ActionSelection = "";
   player1ResultStatus = "";
   player1HitOrStay = "";
 
@@ -934,7 +933,6 @@ const endGame = () => {
   player2CardsValue = "";
   player2CardsTotal = "";
   player2CardsSuites = "";
-  player2ActionSelection = "";
   player2ResultStatus = "";
   player2HitOrStay = "";
 
