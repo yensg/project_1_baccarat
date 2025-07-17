@@ -315,6 +315,10 @@ const startGame = () => {
     "Pictures/decks_of_cards/red_joker.png";
   document.querySelector("#player2Card3").src =
     "Pictures/decks_of_cards/red_joker.png";
+  document.querySelector("#player1Card3").style.visibility = "hidden";
+  document.querySelector("#player2Card3").style.visibility = "hidden";
+  document.querySelector("#dealerCard3").style.visibility = "hidden";
+
   // generate first card
   if (player1PlayingStatus === "play") {
     player1Deal3Cards();
@@ -471,14 +475,14 @@ const tallyResults2Cards = () => {
         player1TotalToken += 2 * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#player1Card3").style.visibility = "hidden";
+        // document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player1CurrTokenAmt + "!";
       } else {
         player1TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt;
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#player1Card3").style.visibility = "hidden";
+        // document.querySelector("#player1Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player1CurrTokenAmt +
@@ -497,7 +501,7 @@ const tallyResults2Cards = () => {
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player1TokenDisplay").innerText =
           player1TotalToken;
-        document.querySelector("#dealerCard3").style.visibility = "hidden";
+        // document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player1CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -531,14 +535,14 @@ const tallyResults2Cards = () => {
         player2TotalToken += 2 * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#player2Card3").style.visibility = "hidden";
+        // document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML += "+" + player2CurrTokenAmt + "!";
       } else {
         player2TotalToken +=
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt;
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#player2Card3").style.visibility = "hidden";
+        // document.querySelector("#player2Card3").style.visibility = "hidden";
         messages.innerHTML +=
           "+" +
           tallyOdds(dealerCardsValue, dealerCardsSuites) * player2CurrTokenAmt +
@@ -555,7 +559,7 @@ const tallyResults2Cards = () => {
             (tallyOdds(dealerCardsValue, dealerCardsSuites) - 1);
         document.querySelector("#player2TokenDisplay").innerText =
           player2TotalToken;
-        document.querySelector("#dealerCard3").style.visibility = "hidden";
+        // document.querySelector("#dealerCard3").style.visibility = "hidden";
         messages.innerHTML +=
           "-" +
           player2CurrTokenAmt * tallyOdds(dealerCardsValue, dealerCardsSuites) +
@@ -618,6 +622,7 @@ const midGame = (event) => {
       document.querySelector("#player1Card3").src = displayCards(
         player1Cards[2]
       );
+      document.querySelector("#player1Card3").style.visibility = "";
       if (
         player2PlayingStatus === "play" &&
         player2ResultStatus === "" &&
@@ -630,6 +635,7 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
+        document.querySelector("#dealerCard3").style.visibility = "";
       }
     } else if (event.target.id === "player1StayButton") {
       player1HitOrStay = "stay";
@@ -638,6 +644,7 @@ const midGame = (event) => {
         document.querySelector("#player1Card3").src = displayCards(
           player1Cards[2]
         );
+        document.querySelector("#player1Card3").style.visibility = "";
       }
       if (
         player2PlayingStatus === "play" &&
@@ -654,7 +661,8 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
-        document.querySelector("#player1Card3").style.visibility = "hidden";
+        document.querySelector("#dealerCard3").style.visibility = "";
+        // document.querySelector("#player1Card3").style.visibility = "hidden";
       }
     }
   }
@@ -668,6 +676,7 @@ const midGame = (event) => {
       document.querySelector("#player2Card3").src = displayCards(
         player2Cards[2]
       );
+      document.querySelector("#player2Card3").style.visibility = "";
       if (
         player1PlayingStatus === "play" &&
         player1ResultStatus === "" &&
@@ -680,6 +689,7 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
+        document.querySelector("#dealerCard3").style.visibility = "";
       }
     } else if (event.target.id === "player2StayButton") {
       player2HitOrStay = "stay";
@@ -688,6 +698,7 @@ const midGame = (event) => {
         document.querySelector("#player2Card3").src = displayCards(
           player2Cards[2]
         );
+        document.querySelector("#player2Card3").style.visibility = "";
       }
       if (
         player1PlayingStatus === "play" &&
@@ -707,7 +718,8 @@ const midGame = (event) => {
         document.querySelector("#dealerCard3").src = displayCards(
           dealerCards[2]
         );
-        document.querySelector("#player2Card3").style.visibility = "hidden";
+        document.querySelector("#dealerCard3").style.visibility = "";
+        // document.querySelector("#player2Card3").style.visibility = "hidden";
       }
     }
   }
@@ -720,23 +732,15 @@ const midGame = (event) => {
       dealerDeal3Cards();
     }
     document.querySelector("#dealerCard3").src = displayCards(dealerCards[2]);
+    document.querySelector("#dealerCard3").style.visibility = "";
   }
-  // console.log(player1HitOrStay);
-  // console.log(player2HitOrStay);
-  // console.log(player1ResultStatus);
-  // console.log(player2ResultStatus);
-  // console.warn(player1HitOrStay === "hit" && player2HitOrStay === "hit");
-  // console.warn(player1HitOrStay === "hit" && player2HitOrStay === "stay");
-  // console.warn(player1HitOrStay === "stay" && player2HitOrStay === "hit");
-  // console.warn(player1HitOrStay === "stay" && player2HitOrStay === "stay");
-  // console.warn(player1HitOrStay === "hit");
-  // console.warn(player2ResultStatus === "win" || player2ResultStatus === "tie");
-  // console.warn(player2HitOrStay === "hit");
-  // console.warn(player1ResultStatus === "win" || player1ResultStatus === "tie");
-  // console.warn(player1HitOrStay === "stay");
-  // console.warn(player2ResultStatus === "win" || player2ResultStatus === "tie");
-  // console.warn(player2HitOrStay === "stay");
-  // console.warn(player1ResultStatus === "win" || player1ResultStatus === "tie");
+  if (player1Cards.length === 3) {
+    document.querySelector("#player1Card3").style.visibility = "";
+  } else if (player2Cards.length === 3) {
+    document.querySelector("#player2Card3").style.visibility = "";
+  } else if (dealerCards.length === 3) {
+    document.querySelector("#dealerCard3").style.visibility = "";
+  }
 
   if (
     (player1HitOrStay === "hit" && player2HitOrStay === "hit") ||
@@ -836,7 +840,7 @@ const tallyResults3Cards = () => {
       }
       dealerP1ResultStatus = "won";
     }
-    if ((player1Cards.length = 3)) {
+    if (player1Cards.length === 3) {
       document.querySelector("#player2Card3").style.visibility = "";
     }
   }
@@ -886,7 +890,7 @@ const tallyResults3Cards = () => {
       }
       dealerP2ResultStatus = "won";
     }
-    if ((player2Cards.length = 3)) {
+    if (player2Cards.length === 3) {
       document.querySelector("#player2Card3").style.visibility = "";
     }
   }
