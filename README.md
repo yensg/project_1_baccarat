@@ -206,7 +206,7 @@ First, from the user point of view, I wrote out what an user would experience wh
 
 ### Beautify the website via CSS.
 
-![Grid Box Reference](Pictures/Initital Styling of CSS.png)
+![Grid Box Reference](Pictures/initital_styling_of_CSS.png)
 
 - In general i used 5 different areas to style this website
   - General styling via style.css methods
