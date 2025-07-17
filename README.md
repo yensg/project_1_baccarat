@@ -1,6 +1,6 @@
 # Project 1: Baccarat
 
-![Final Game Interface](Pictures/In Game Interface.png)
+![Final Game Interface](Pictures/in_game_interface.png)
 
 ---
 
@@ -197,7 +197,7 @@ First, from the user point of view, I wrote out what an user would experience wh
 
 ### Writing of codes in JavaScripts
 
-![JS coding](Pictures/Initial In Game Interface.png)
+![JS coding](Pictures/initial_in_game_interface.png)
 
 - Based on the pseudocodes, write out the variables and functions.
 - Most difficult parts are actually the coding of the winning conditions for each player.
@@ -219,6 +219,6 @@ First, from the user point of view, I wrote out what an user would experience wh
 
 ## Final results!
 
-![Final In Game Page](Pictures/In Game Instruction.png)
+![Final In Game Page](Pictures/in_game_instruction.png)
 
 Please enjoy the game and hope that you liked it!
