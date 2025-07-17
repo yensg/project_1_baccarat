@@ -794,7 +794,7 @@ const tallyResults3Cards = () => {
             tallyOddsFinal(dealerCardsValue, dealerCardsSuites) +
           "!";
       } else {
-        messages.innerHTML += "+" + player1CurrTokenAmt + "!";
+        messages.innerHTML += "-" + player1CurrTokenAmt + "!";
       }
       dealerP1ResultStatus = "won";
     }
