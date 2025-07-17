@@ -1,43 +1,48 @@
 # Project 1: Baccarat
 
-![Website Layout](Pictures/project_1_barrarat_layout.png)
-
-## User Experience
-
-How to play?
-
-Action based:
-
-1. Select a seat (phase 2)
-
-   - type in name
-   - given 100 tokens
+![Final Game Interface](Pictures/In Game Interface.png)
 
 ---
 
-2. Start playing
+## Introduction
 
-3. Issing cards to players
+This is game is created based on HTML, CSS and JAVASCRIPT.
+
+I'm going to share in few phases
+
+- Planning stage
+- Process of coding the game
+
+---
+
+## Planning stage
+
+### User Experience
+
+First, from the user point of view, I wrote out what an user would experience while playing.
+
+1. Start to click and play
+
+2. Issing cards to players
 
    - First cards issued to players and banker
    - Second cards and stop.
    - Last card is empty
+   - Annoucement of results if have winning cards at this stage.
 
-4. Players need to decide if >= 5 to
+3. If no winning cards yet, players need to decide if the cards they have are >= 5, they have few courses of action.
 
    - if < 5 will auto issue card
    - hit: get another cards
    - stay: not get another cards.
 
-5. After that reveal results and payout tokens
+4. After that reveal results and payout tokens
 
-6. Continue to play or exit.
-
-7. Score to be recorded
+5. Continue to play or exit.
 
 ---
 
-## Rules of the games
+### Rules of the games
 
 - When first 2 cards are dealt.
 
@@ -72,7 +77,7 @@ Action based:
 
 ---
 
-## Pseudocodes
+### Pseudocodes
 
 1. Define variables
 
@@ -108,12 +113,13 @@ Action based:
        - if < 5 and didnt press hit, will auto given a card
 
    - auto trigger winning conditions 2
+
      - update the scores
      - update message
 
 ---
 
-Event flow
+### Event flow
 
 - player2TokenSelection()
 
@@ -159,7 +165,60 @@ Event flow
   - Update turns here.
 
 - click on player1HitButton to trigger midGame()
+
   - if player1 didnt win with 2 cards then can decide to hit or stay
-  - if hit, he will get next card
-  - if stay, he might still get the next card if his score is below 5.
-  - either way, he will update the HitOrStay variable.
+    - if hit, he will get next card
+    - if stay, he might still get the next card if his score is below 5.
+    - either way, he will update the HitOrStay variable.
+  - update dealer's cards
+  - trigger tallyResults3Cards() when conditions met for how many players are playing and what are their current status.
+
+- tallyResults3Cards()
+  - Check players and dealer have the same results, if yes it's a tie.
+  - Otherwise check which party has higher results than the other.
+  - Then check for odds to tabulate token payout to each players.
+  - once finished, endGame();
+
+---
+
+## Process of coding the game
+
+### Creating of HTML elements
+
+![Website Layout](Pictures/project_1_barrarat_layout.png)
+
+- Drew out the layout of the website by thinking of the element tags
+- Structured the layout in terms of flexbox pattern to:
+  - flex-direction: column; or
+  - flex-direction: row;
+- Hence, it is to think of which squares are within which squares.
+
+---
+
+### Writing of codes in JavaScripts
+
+![JS coding](Pictures/Initial In Game Interface.png)
+
+- Based on the pseudocodes, write out the variables and functions.
+- Most difficult parts are actually the coding of the winning conditions for each player.
+
+---
+
+### Beautify the website via CSS.
+
+![Grid Box Reference](Pictures/Initital Styling of CSS.png)
+
+- In general i used 5 different areas to style this website
+  - General styling via style.css methods
+  - Flexbox to align all boxes center
+  - Gridbox to fix all the boxes at their required positions
+  - Use bootstrap to create the buttons
+  - Finally, style instructions using `<span style="color">` within each element.
+
+---
+
+## Final results!
+
+![Final In Game Page](Pictures/In Game Instruction.png)
+
+Please enjoy the game and hope that you liked it!
